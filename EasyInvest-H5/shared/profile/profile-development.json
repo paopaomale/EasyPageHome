@@ -1,0 +1,25 @@
+{
+    "serverUrl":"http://61.186.243.111",
+    "bslUrl":"http://mall.changan.com.cn",
+    "emission":"second427",
+    "emission_4_value":"third578",
+    "emission_5_value":"third579",
+    "exteriorColor_key":"jokerParamId627",
+    "diyRefresh_key":["roofColor","festoons"],
+    "roofColor_value":"519",
+    "sign_required":"●",
+    "sign_selected":"-/●",
+    "sign_reversed":"○",
+    "sign_none":"-",
+    "img_download_path":"http://61.186.243.111/ca-web/rock/img/car-builder-app/",
+    "diy_productId":"10235",
+    "imageType":{
+        "120-60":"_120_60",
+        "150-100":"_150_100",
+        "200-200":"_200_200",
+        "450-300":"_450_300",
+        "450-450":"_450_450",
+        "900-450":"_900_450",
+        "900-900":"_900_900"
+    }
+}

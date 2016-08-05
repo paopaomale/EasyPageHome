@@ -1,0 +1,20 @@
+{
+    "mainPage": "0",
+    "data": [{
+            "PageUrl": "main/main-invest",
+            "name": "invest",
+            "text": "投资"
+        }, {
+            "PageUrl": "news/index",
+            "name": "news",
+            "text": "资讯"
+        }, {
+            "PageUrl": "live/index",
+            "name": "live",
+            "text": "直播"
+        }, {
+            "PageUrl": "account/index",
+            "name": "account",
+            "text": "账户"
+        }]
+}
