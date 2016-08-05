@@ -1,13 +1,1 @@
-define([
-	'butterfly/view',
-	'butterfly',
-	], 
-	function(View, Butterfly, ViewTemplate){
-
-	return View.extend({
-		swipe:null,
-		events: {
-			"click #go": "close"
-		},
-	}); //view define
-});
+define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({swipe:null,events:{"click #go":"close"}})});
