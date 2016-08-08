@@ -1,1 +1,1 @@
-define(["shared/js/client"],function(a){return _.extend(a,{CHECKSMS_URL:a.basePath+"/auth/checksms",REGISTER_URL:a.basePath+"/user/register"})});
+define(["shared/js/client"],function(a){return _.extend(a,{SMS_URL:a.basePath+"/auth/sms",REGISTER_URL:a.basePath+"/user/register"})});
