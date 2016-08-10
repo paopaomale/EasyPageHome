@@ -1,1 +1,1 @@
-define(["butterfly/view","butterfly","text!main/main-invest.html"],function(a,b,c){return a.extend({swipe:null,events:{"click #go":"close"}})});
+define(["butterfly/view","butterfly","text!main/main-invest.html"],function(a,b,c){return a.extend({swipe:null,events:{"click #go":"close"},render:function(){a.prototype.render.call(this),console.log("render1111")},onShow:function(){console.log("render1111")}})});

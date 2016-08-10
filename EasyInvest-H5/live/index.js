@@ -1,1 +1,1 @@
-define(["butterfly/view","butterfly","text!news/index.html","swipe"],function(a,b,c,d){return a.extend({swipe:null,events:{"click #go":"close"}})});
+define(["butterfly/view","butterfly","swipe"],function(a,b,c){return a.extend({events:{"click #go":"close"},render:function(){a.prototype.render.call(this),console.log("render1111")},onShow:function(){this.initSwipe()},initSwipe:function(){this.swipe||(this.swipe=this.$(".adSwipe").Swipe({startSlide:0,speed:3e3,auto:1e3,continuous:!0,disableScroll:!1,stopPropagation:!1,closeEndMotion:!0}))}})});
