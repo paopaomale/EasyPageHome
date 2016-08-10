@@ -1,1 +1,1 @@
-define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({swipe:null,events:{"click #go":"close"}})});
+define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({swipe:null,events:{"click #go":"close"},render:function(){console.log("f")}})});
