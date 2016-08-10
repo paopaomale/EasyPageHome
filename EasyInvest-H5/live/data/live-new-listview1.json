@@ -1,0 +1,17 @@
+{
+   "result":0,
+   "total":2,
+   "data":[{
+        "id":10,
+        "grade": 0,
+        "gradeValue":"新手专场",
+        "gradeText":"所有用户均可换看",
+        "brief": "技能培训，投资教育，行情解读"
+  	},{
+  		"id":10,
+        "grade": 2,
+        "gradeValue":"VIP专场",
+        "gradeText":"白银以上会员可观看",
+        "brief": "金牌分析师，实时喊单，精准分析点位"
+  	}]
+}
