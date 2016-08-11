@@ -1,0 +1,1 @@
+define(["butterfly/view","butterfly","shared/js/datasource","listview/ListView","swipe"],function(a,b,c,d,e){return a.extend({events:{},render:function(){a.prototype.render.call(this),console.log("render1111")},onShow:function(){}})});
