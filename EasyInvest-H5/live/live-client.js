@@ -1,0 +1,1 @@
+define(["shared/js/client"],function(a){return _.extend(a,{SCHEDULE_URL:"../live/data/schedule.json",REGISTER_URL:a.basePath+"/user/register"})});
