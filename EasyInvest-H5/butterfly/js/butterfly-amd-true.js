@@ -1,6 +1,6 @@
 require.config({
 	baseUrl: '../',
-	urlArgs:'v=1471335481591',
+	urlArgs:'v=1471335556120',
 	packages: [{
 		name: 'butterfly',
 		location: 'butterfly/js',
