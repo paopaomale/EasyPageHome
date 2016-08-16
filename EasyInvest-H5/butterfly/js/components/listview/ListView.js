@@ -1,1 +1,535 @@
-define(["jquery","underscore","backbone","./ListViewTemplateItem","dialog","../shared/js/jquery.lazyload.min","iscrollprobe"],function(a,b,c,d,e){var f=["id","autoLoad","itemTemplate","itemClass","dataSource","pageSize","isPullToRefresh","isLoadSuccess"],g=c.View.extend({events:{"click .loadmore":"onLoadMore","click li":"onRowSelect"},defaults:{autoLoad:!0,editing:!1,page:1,pageSize:20,isPullToRefresh:!0,isLoadSuccess:!1},initialize:function(){var c=this;this.subviews=[],b.extend(this,this.defaults,b.pick(arguments[0],f)),this.itemTemplate&&(this.itemClass=d.extend({template:this.itemTemplate}));var e=navigator.userAgent,g=e.indexOf("Android")>-1||e.indexOf("Adr")>-1;c.IScroll=new IScroll(this.el,{probeType:2,scrollX:!1,scrollY:!0,mouseWheel:!0,click:g,isPullToRefresh:this.isPullToRefresh}),this.el.querySelector(".pulldown")&&this.el.classList.add("withpulldown");var h=(a(c.IScroll.wrapper),this.$pullDown=this.$(".pulldown")),i=this.$pullUp=this.$("ul~.pullup");if(c.IScroll.on("scrollStart",function(){this.startY=this.y,!i.hasClass("_empty")&&c.isLoadSuccess&&i.addClass("withpullup")}),c.IScroll.on("scroll",function(){this.y>10?(h.addClass("flip").find(".label").html("释放更新"),this.minScrollY=0):this.y<10&&c.isLoadSuccess&&(h.removeClass("flip").find(".label").html("下拉刷新"),this.minScrollY=-h.outerHeight()),!i.hasClass("_empty")&&c.isLoadSuccess&&i.addClass("flip").addClass("loading").find(".label").html("加载中,请稍候...")}),c.IScroll.on("scrollEnd",function(){h.hasClass("flip")&&c.onPullDown(),this.startY-this.y>=0&&Math.abs(this.maxScrollY)-Math.abs(this.y)<60&&i.length&&!i.hasClass("_hidden")&&c.isLoadSuccess&&!c.IScroll.isLoading&&(i.addClass("withpullup"),c.onPullUp())}),this.autoLoad){var j=this.loadState();j?this.restoreData(j):this.reloadData()}},refresh:function(){var a=this;setTimeout(function(){a.IScroll.refresh()},0)},refreshByState:function(a){var b=this;setTimeout(function(){b.IScroll.refresh(),b.IScroll.scrollTo(0,a.y)},0)},onRowSelect:function(a){var c=a.currentTarget,d=this.el.querySelector("ul").children,e=b.indexOf(d,c),f=this.subviews[e];this.editing?(f.toggleSelect(),this.trigger("editItemSelect",this,f,e,a)):this.trigger("itemSelect",this,f,e,a)},onPullDown:function(){var a=this;a.reloadData()},onLoadMore:function(a){var b=this,c=a.currentTarget;c.classList.add("loading"),this.dataSource.loadData(this.page+1,this.pageSize,function(a,d){b.page++,c.classList.remove("loading"),d?(b.$(".loadmore").removeClass("visible"),b.$pullUp.addClass("_empty")):(b.$(".loadmore").addClass("visible"),b.$pullUp.removeClass("_empty").find(".label").html("上拉加载更多...")),d&&0==a.length&&b.$(".message, .message .empty").addClass("visible"),a&&a.length>0&&a.forEach(function(a){var c=new b.itemClass({data:a});c.setEditing(b.editing),b.addItem(c)}),b.refresh(),setTimeout(function(){b.trigger("load",b),b.setScrollerMinHeight()},0)},function(a){c.classList.remove("loading"),b.refresh(),b.trigger("error",b)})},onPullUp:function(){var a=this;a.$pullUp.hasClass("_empty")||a.$(".message").hasClass("visible")||(a.IScroll.isLoading=!0,this.dataSource.loadData(this.page+1,this.pageSize,function(b,c){a.page++,a.IScroll.isLoading=!1,a.$pullUp.removeClass("flip").removeClass("loading"),c?a.$pullUp.addClass("_empty").find(".label").html("暂无更多数据"):a.$pullUp.removeClass("_empty").find(".label").html("上拉加载更多..."),c&&0==b.length&&(a.$pullUp.removeClass("flip").removeClass("loading"),a.$pullUp.addClass("_empty").find(".label").html("暂无更多数据")),b&&b.length>0&&b.forEach(function(b){var c=new a.itemClass({data:b});c.setEditing(a.editing),a.addItem(c)}),a.refresh(),setTimeout(function(){a.trigger("load",a),a.setScrollerMinHeight()},0)},function(b){a.IScroll.isLoading=!1,a.$pullUp.removeClass("flip").removeClass("loading"),a.$pullUp.removeClass("withpullup"),a.$pullUp.addClass("_hidden"),a.refresh(),a.trigger("error",a)}))}},{clear:function(a){delete window.sessionStorage["ListView:"+a]}});return b.extend(g.prototype,{saveState:function(){var a={y:this.IScroll.y,page:this.page,finish:this.dataSource.finish,items:this.subviews.length};window.sessionStorage["ListView:"+this.id]=JSON.stringify(a)},loadState:function(){var a=window.sessionStorage["ListView:"+this.id];return a?JSON.parse(a):a},restoreData:function(a){console.log("ListView.restoreData");var b=this;this.page=a.page,this.finish=a.finish;var c=this.dataSource.loadDataFromCache(0,a.items);c&&c.length>0?(c.length<this[this.dataSource.options.pageSizeParam]&&(this.finish=!0),finish?(b.$(".loadmore").removeClass("visible"),b.$pullUp.addClass("_empty")):(b.$(".loadmore").addClass("visible"),b.$pullUp.removeClass("_empty").find(".label").html("上拉加载更多...")),this.finish&&0==c.length?(b.$pullUp.removeClass("flip").removeClass("loading"),b.$pullUp.addClass("_empty").find(".label").html("暂无更多数据")):(b.$pullUp.addClass("flip").addClass("loading"),b.$pullUp.removeClass("_empty").find(".label").html("加载中,请稍候..."),b.$(".message, .message .empty").removeClass("visible")),b.deleteAllItems(),c.forEach(function(a){var c=new b.itemClass({data:a});c.setEditing(b.editing),b.addItem(c)}),b.refreshByState(a),setTimeout(function(){b.trigger("load",b),b.setScrollerMinHeight()},0)):this.reloadData()}}),b.extend(g.prototype,{setEditing:function(a){this.subviews.forEach(function(b){b.setEditing(a)}),this.editing=a},reset:function(){this.page=1,this.$(".loadmore").removeClass("visible"),this.$(".message, .message > div").removeClass("visible")},reloadData:function(){console.log("ListView.reloadData");var a=this;this.reset(),this.dataSource.clear(),this.IScroll.minScrollY=0,this.IScroll.isLoading=!0,this.IScroll.scrollTo(0,0,600,""),this.$pullDown.removeClass("flip").addClass("loading").find(".label").html("加载中,请稍候..."),setTimeout(function(){a.dataSource.loadData(a.page,a.pageSize,function(b,c){(null==b||""==b)&&(b=[]),a.IScroll.isLoading=!1,a.isLoadSuccess=!0,a.$pullDown.removeClass("flip loading").find(".label").html("下拉刷新..."),c?(a.$(".loadmore").removeClass("visible"),a.$pullUp.addClass("_hidden").addClass("_empty")):(a.$(".loadmore").addClass("visible"),a.$pullUp.addClass("withpullup"),a.$pullUp.removeClass("_empty").removeClass("_hidden").find(".label").html("上拉加载更多...")),c&&0==b.length&&a.$(".message, .message .empty").addClass("visible"),a.deleteAllItems(),b.forEach(function(b){var c=new a.itemClass({data:b});c.setEditing(a.editing),a.addItem(c)}),a.refresh(),setTimeout(function(){a.trigger("load",a),a.setScrollerMinHeight()},0)},function(b,c,d){a.IScroll.isLoading=!1,1!=d&&(a.$pullUp.removeClass("withpullup"),a.$pullUp.addClass("_hidden"),a.$pullDown.removeClass("flip loading").find(".label").html("下拉刷新..."),a.isLoadSuccess?e.showToast("加载数据失败！"):a.$(".message, .message .error").addClass("visible")),a.refresh(),setTimeout(function(){a.trigger("error",a),a.setScrollerMinHeight()},0)})},this.isPullToRefresh?400:0)},addItem:function(a){var b=this;this.subviews.push(a),this.el.querySelector("ul").appendChild(a.el),b.$(".lazyload img").lazyload({event:"sporty",load:function(){b.scroller&&b.scroller.refresh()}}),this.$(".lazyload img").trigger("sporty")},deleteItems:function(a,c){this.subviews=b.filter(this.subviews,function(b,c){return a.indexOf(c)>=0&&b.remove(),a.indexOf(c)<0}),c&&this.refresh()},deleteAllItems:function(a){b.each(this.subviews,function(a){a.remove()}),this.subviews=[],a&&this.refresh()},selectedItems:function(){return b.filter(this.subviews,function(a){return a.selected})},selectedIndexes:function(){var a=this.subviews;return b.chain(a).filter(function(a){return a.selected}).map(function(b){return a.indexOf(b)}).value()},setScrollerMinHeight:function(){var b=this,c=this.IScroll.wrapperHeight,d=a(this.IScroll.scroller).find(".pulldown").outerHeight(),e=c+d+1;this.$el.find(".scroller").css("min-height",e),setTimeout(function(){b.IScroll.refresh()},400)}}),g});
+/**
+ * list view component
+ * 下拉刷新实现方式：如检测到下拉控件，假设为40px，则滚动区top: -40px;
+ */
+define(['jquery', 'underscore', 'backbone','./ListViewTemplateItem', 'dialog','../shared/js/jquery.lazyload.min','iscrollprobe'],
+	function($, _, Backbone, TItem, Dialog) {
+
+		var options = ['id', 'autoLoad', 'itemTemplate', 'itemClass', 'dataSource', 'pageSize', 'isPullToRefresh', 'isLoadSuccess'];
+
+		var listview = Backbone.View.extend({
+			events: {
+				"click .loadmore": "onLoadMore",
+				"click li": "onRowSelect"
+			},
+			defaults: {
+				autoLoad: true,
+				editing: false,
+				page: 1,
+				pageSize: 20,
+				isPullToRefresh: true,
+				isLoadSuccess: false
+			},
+
+			initialize: function() {
+				var me = this;
+				this.subviews = [];
+
+				//grab params
+				_.extend(this, this.defaults, _.pick(arguments[0], options));
+
+				//convert itemTemplate to itemClass
+				if (this.itemTemplate) {
+					//this.itemTemplate already compiled
+					this.itemClass = TItem.extend({
+						template: this.itemTemplate
+					});
+				}
+				var u = navigator.userAgent;
+				var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+				me.IScroll = new IScroll(this.el, {
+					probeType: 2,
+					scrollX: false,
+					scrollY: true,
+					mouseWheel: true,
+					click: isAndroid,//安卓端 才click = true;
+					isPullToRefresh: this.isPullToRefresh
+				});
+
+				//隐藏pulldown
+				if (this.el.querySelector('.pulldown')) {
+					this.el.classList.add('withpulldown');
+				};
+
+				var $wrapper = $(me.IScroll.wrapper);
+				var $pullDown = this.$pullDown = this.$('.pulldown');
+				var $pullUp = this.$pullUp = this.$('ul~.pullup');
+
+				me.IScroll.on('scrollStart', function(){
+                    this.startY = this.y;
+                    if(!$pullUp.hasClass('_empty') && me.isLoadSuccess){
+                        $pullUp.addClass('withpullup');
+                    }
+               });
+
+				me.IScroll.on('scroll', function() {
+					if (this.y > 10) {
+						$pullDown.addClass('flip').find('.label').html('释放更新');
+						this.minScrollY = 0;
+					} else if (this.y < 10 && me.isLoadSuccess) {
+						$pullDown.removeClass('flip').find('.label').html('下拉刷新');
+						this.minScrollY = -$pullDown.outerHeight();
+					}
+
+					//上拉&如果没有结束
+                    if(!$pullUp.hasClass('_empty') && me.isLoadSuccess){
+                    	$pullUp.addClass('flip').addClass('loading').find('.label').html('加载中,请稍候...');
+                    }
+				});
+
+				me.IScroll.on('scrollEnd', function() {
+					//if already flip
+					if ($pullDown.hasClass('flip')) {
+						me.onPullDown();
+					}
+
+					//设置滑动距离底部还有60px的距离时自动加载
+                    if(this.startY - this.y >= 0
+                        && Math.abs(this.maxScrollY) - Math.abs(this.y) < 60
+                        && $pullUp.length && !$pullUp.hasClass('_hidden')
+                        && me.isLoadSuccess
+                        && !me.IScroll.isLoading){
+                        $pullUp.addClass('withpullup');
+                        me.onPullUp();
+                    }
+				});
+
+				if (this.autoLoad) {
+					var state = this.loadState();
+					if (state) {
+						this.restoreData(state);
+					} else {
+						this.reloadData();
+					}
+				}
+
+			}, //initialize
+
+			//刷新
+			refresh: function() {
+				var me = this;
+				setTimeout(function() {
+					me.IScroll.refresh();
+				}, 0);
+			},
+
+			refreshByState: function(state) {
+				var me = this;
+				setTimeout(function() {
+					me.IScroll.refresh();
+					me.IScroll.scrollTo(0, state.y);
+				}, 0);
+			},
+
+			//选择了某一行
+			onRowSelect: function(event) {
+				var li = event.currentTarget;
+				var liCollection = this.el.querySelector('ul').children;
+				var index = _.indexOf(liCollection, li);
+				var item = this.subviews[index];
+				if (!this.editing) {
+					this.trigger('itemSelect', this, item, index, event);
+				} else {
+					item.toggleSelect();
+					//监听在编辑状态下被选中的事件
+					this.trigger('editItemSelect', this, item, index, event);
+				}
+			},
+
+			//下拉的默认行为为重新加载数据
+			//可以通过覆盖此方法，实现类似Twitter的加载更多旧数据
+			onPullDown: function() {
+				var me = this;
+				me.reloadData();
+			},
+
+			onLoadMore: function(event) {
+				var me = this;
+				var loadmoreButton = event.currentTarget;
+				//show loading animate
+				loadmoreButton.classList.add('loading');
+
+				this.dataSource.loadData(this.page + 1, this.pageSize, function(result, finish) {
+
+					//increase current page number when success
+					me.page++;
+
+					//stop loading animate
+					loadmoreButton.classList.remove('loading');
+
+					//loadmore
+					if (finish) {
+						me.$('.loadmore').removeClass('visible');
+						me.$pullUp.addClass('_empty')
+					} else {
+						me.$('.loadmore').addClass('visible');
+						me.$pullUp.removeClass('_empty').find('.label').html('上拉加载更多...');
+					}
+
+					//显示没有更多数据
+					if (finish && result.length == 0) {
+						me.$('.message, .message .empty').addClass('visible');
+					};
+
+					if (result && result.length > 0) {
+						//append items
+						result.forEach(function(data) {
+							var item = new me.itemClass({
+								data: data
+							});
+							item.setEditing(me.editing);
+							me.addItem(item);
+						});
+					} else {
+						//show no data
+
+					}
+					me.refresh();
+					setTimeout(function() {
+						me.trigger('load', me);
+						me.setScrollerMinHeight();
+					}, 0)
+
+				}, function(error) {
+					//stop loading animate
+					loadmoreButton.classList.remove('loading');
+					me.refresh();
+					me.trigger('error', me);
+					// alert('数据加载失败');
+				});
+
+			},
+
+			onPullUp: function(){
+				var me = this;
+				//如果上拉刷新被隐藏则不加载数据
+				if(me.$pullUp.hasClass('_empty')){
+					return;
+				}
+				if(me.$('.message').hasClass('visible')){
+					return;
+				}
+
+				me.IScroll.isLoading = true;
+				// this.$pullUp.removeClass('flip').addClass('loading').find('.label').html('加载中...');
+				this.dataSource.loadData(this.page + 1, this.pageSize, function(result, finish) {
+					//increase current page number when success
+					me.page++;
+
+					me.IScroll.isLoading = false;
+					//pullup
+					me.$pullUp.removeClass('flip').removeClass('loading');
+					//pullup
+					if (finish) {
+						me.$pullUp.addClass('_empty').find('.label').html('暂无更多数据');
+					} else {
+						me.$pullUp.removeClass('_empty').find('.label').html('上拉加载更多...');
+					}
+
+					//显示没有更多数据
+					if (finish && result.length == 0) {
+						me.$pullUp.removeClass('flip').removeClass('loading');
+						me.$pullUp.addClass('_empty').find('.label').html('暂无更多数据');
+						// me.$('.message, .message .empty').addClass('visible');
+					};
+
+					if (result && result.length > 0) {
+						//append items
+						result.forEach(function(data) {
+							var item = new me.itemClass({
+								data: data
+							});
+							item.setEditing(me.editing);
+							me.addItem(item);
+						});
+					} else {
+						//show no data
+
+					}
+					me.refresh();
+					setTimeout(function() {
+						me.trigger('load', me);
+						me.setScrollerMinHeight();
+					}, 0)
+
+				}, function(error) {
+					me.IScroll.isLoading = false;
+					//stop loading animate
+					// loadmoreButton.classList.remove('loading');
+					me.$pullUp.removeClass('flip').removeClass('loading');
+					me.$pullUp.removeClass('withpullup');
+					me.$pullUp.addClass('_hidden');
+					me.refresh();
+					me.trigger('error', me);
+					// alert('数据加载失败');
+				});
+
+			}
+
+		}, {
+			//clear listview state by id, this API may be changed later
+			clear: function(id) {
+				delete window.sessionStorage['ListView:' + id];
+			}
+		});
+
+		/**
+		 * Cache
+		 */
+		_.extend(listview.prototype, {
+
+			saveState: function() {
+				var state = {
+					y: this.IScroll.y,
+					page: this.page,
+					finish: this.dataSource.finish,
+					items: this.subviews.length
+				}
+				window.sessionStorage['ListView:' + this.id] = JSON.stringify(state);
+			},
+
+			loadState: function() {
+				var state = window.sessionStorage['ListView:' + this.id];
+				return state ? JSON.parse(state) : state;
+			},
+
+			//从缓存中恢复数据
+			restoreData: function(state) {
+				console.log('ListView.restoreData');
+				var me = this;
+				this.page = state.page;
+				this.finish = state.finish;
+
+				var cache = this.dataSource.loadDataFromCache(0, state.items);
+				if (cache && cache.length > 0) {
+
+					if (cache.length < this[this.dataSource.options.pageSizeParam]) { //缓存数据小于20条的时候
+						this.finish = true;
+					}
+
+					//loadmore
+					if (finish) {
+						me.$('.loadmore').removeClass('visible');
+						me.$pullUp.addClass('_empty')
+					} else {
+						me.$('.loadmore').addClass('visible');
+						me.$pullUp.removeClass('_empty').find('.label').html('上拉加载更多...');
+					}
+
+					//显示没有更多数据
+					if (this.finish && cache.length == 0) {
+						me.$pullUp.removeClass('flip').removeClass('loading');
+						me.$pullUp.addClass('_empty').find('.label').html('暂无更多数据');
+						// me.$('.message, .message .empty').addClass('visible');
+					} else {
+						me.$pullUp.addClass('flip').addClass('loading');
+						me.$pullUp.removeClass('_empty').find('.label').html('加载中,请稍候...');
+						me.$('.message, .message .empty').removeClass('visible');
+					};
+
+					//remove all
+					me.deleteAllItems();
+					//append items
+					cache.forEach(function(data) {
+						var item = new me.itemClass({
+							data: data
+						});
+						item.setEditing(me.editing);
+						me.addItem(item);
+					});
+					me.refreshByState(state);
+					setTimeout(function() {
+						me.trigger('load', me);
+						me.setScrollerMinHeight();
+					}, 0)
+
+				} else {
+					this.reloadData();
+				}
+			}
+		});
+
+		/**
+		 * Data Mantance
+		 */
+		_.extend(listview.prototype, {
+
+			setEditing: function(editing) {
+
+				this.subviews.forEach(function(subview) {
+					subview.setEditing(editing);
+				});
+
+				this.editing = editing;
+			},
+
+			reset: function() {
+
+				//删除所有cell
+				// this.deleteAllItems();
+
+				//重置页码
+				this.page = 1;
+
+				//重置下拉刷新
+				// this.el.classList.remove('pulleddown');
+				// this.$pullDown.removeClass('flip loading').find('.label').html('下拉刷新...');
+
+				//reset loadmore button
+				this.$('.loadmore').removeClass('visible');
+
+				//reset message area
+				this.$('.message, .message > div').removeClass('visible');
+
+				// this.refresh();
+			},
+
+			reloadData: function() {
+
+				console.log('ListView.reloadData');
+				var me = this;
+				this.reset();
+				this.dataSource.clear();
+
+				//启动下拉刷新加载中动画
+				// this.el.classList.add('pulleddown');
+				this.IScroll.minScrollY = 0;
+				this.IScroll.isLoading = true;
+				this.IScroll.scrollTo(0, 0, 600, "");
+				this.$pullDown.removeClass('flip').addClass('loading').find('.label').html('加载中,请稍候...'); //第一次加载也需要菊花图
+				setTimeout(function() {
+					me.dataSource.loadData(me.page, me.pageSize, function(result, finish) {
+						if (result == null || result == "") result = [];
+						//success callback
+						me.IScroll.isLoading = false;
+						me.isLoadSuccess = true;
+						// me.el.classList.remove('pulleddown');
+						me.$pullDown.removeClass('flip loading').find('.label').html('下拉刷新...');
+
+						//loadmore
+						if (finish) {
+							me.$('.loadmore').removeClass('visible');
+							me.$pullUp.addClass('_hidden').addClass('_empty');
+						} else {
+							me.$('.loadmore').addClass('visible');
+							me.$pullUp.addClass('withpullup');
+							me.$pullUp.removeClass('_empty').removeClass('_hidden').find('.label').html('上拉加载更多...');
+						}
+
+						//显示没有更多数据
+						if (finish && result.length == 0) {
+							me.$('.message, .message .empty').addClass('visible');
+						};
+
+						//remove all
+						me.deleteAllItems();
+						//append items
+						result.forEach(function(data) {
+							var item = new me.itemClass({
+								data: data
+							});
+							item.setEditing(me.editing);
+							me.addItem(item);
+						});
+						me.refresh();
+
+						//若数据加载非异步，则load事件会先于用户的listenTo方法执行，使用setTimeout延迟load事件触发时机
+						setTimeout(function() {
+							me.trigger('load', me);
+							me.setScrollerMinHeight();
+						}, 0);
+
+					}, function(error, status, isabort) {
+						// me.reset();
+						me.IScroll.isLoading = false;
+						if (isabort != true) { //手动中断请求不提示加载数据失败
+
+							me.$pullUp.removeClass('withpullup');
+							me.$pullUp.addClass('_hidden');
+							me.$pullDown.removeClass('flip loading').find('.label').html('下拉刷新...');
+							if (!me.isLoadSuccess) {
+								me.$('.message, .message .error').addClass('visible');
+							} else {
+								Dialog.showToast('加载数据失败！')
+							}
+						}
+						me.refresh();
+						setTimeout(function() {
+							me.trigger('error', me);
+							me.setScrollerMinHeight();
+						}, 0);
+					});
+				}, this.isPullToRefresh ? 400 : 0);
+			},
+
+			addItem: function(item) {
+				var me = this;
+				this.subviews.push(item);
+				this.el.querySelector("ul").appendChild(item.el);
+				//懒加载图片
+                me.$('.lazyload img').lazyload({
+                    event: 'sporty',
+                    load: function() {
+                        if (me.scroller) {
+                            me.scroller.refresh();
+                        }
+                    }
+                });
+
+                //触发懒加载
+                this.$('.lazyload img').trigger('sporty');
+			},
+
+			//删除一个或多个item
+			deleteItems: function(array, refresh) {
+				//invoke remove
+				this.subviews = _.filter(this.subviews, function(each, index) {
+					if (array.indexOf(index) >= 0) each.remove();
+					return array.indexOf(index) < 0;
+				});
+				if (refresh) this.refresh();
+			},
+			//删除所有item
+			deleteAllItems: function(refresh) {
+				_.each(this.subviews, function(subview) {
+					subview.remove();
+				});
+				this.subviews = [];
+
+				if (refresh) this.refresh();
+			},
+
+			selectedItems: function() {
+				var me = this;
+				return _.filter(this.subviews, function(item) {
+					return item.selected;
+				});
+			},
+
+			selectedIndexes: function() {
+				var items = this.subviews;
+				return _.chain(items)
+					.filter(function(item) {
+						return item.selected;
+					})
+					.map(function(item) {
+						return items.indexOf(item);
+					})
+					.value();
+			},
+			setScrollerMinHeight: function() {
+				var me = this;
+				var wrapperHeight = this.IScroll.wrapperHeight;
+				var withpulldownHeight = $(this.IScroll.scroller).find(".pulldown").outerHeight();
+				var minScrollerHeight = wrapperHeight + withpulldownHeight + 1;
+				this.$el.find(".scroller").css("min-height", minScrollerHeight);
+				setTimeout(function() { //延迟刷新iscroll
+					me.IScroll.refresh();
+				}, 400);
+
+			}
+
+		});
+
+		return listview;
+	});

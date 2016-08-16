@@ -1,4 +1,63 @@
-<div id=my-integral data-view=account/my-integral><style type=text/css>#my-integral .integral-header-box{height:.7rem;padding:.15rem 0;background-image:-webkit-gradient(linear,left top,left bottom,color-stop(.5,#f3efdf),to(#f1ead3))}#my-integral #integral-list{padding:0;top:.7rem;bottom:0}#my-integral .integral-header-box>div{display:inline-block;width:49%;text-align:center;height:100%}#my-integral .border-r:after{background-color:#e6dfc8}#my-integral .vip-title{font-size:.14rem;color:#976c00}#my-integral .vip-level{font-size:.12rem;color:#41310b;padding-top:4px}#my-integral .integral-list-tr{height:.6rem;position:relative;padding:.13rem .1rem;background-color:#fff}#my-integral .integral-content{display:inline-block;font-size:.14rem;color:#313131}#my-integral .integral-num{display:inline-block;font-size:.14rem;float:right;color:#9f5c00}#my-integral .get-integral-time{font-size:.12rem;color:#bcbcbc}</style><script id=integral-list-template type=text/x-underscore-template><div class="integral-list-tr border-b">
+<div id="my-integral" data-view="account/my-integral">
+    <style type="text/css">
+    #my-integral .integral-header-box {
+        height: .70rem;
+        padding: .15rem 0;
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.5, #f3efdf), to(#f1ead3));
+
+    }
+    #my-integral #integral-list{
+        padding: 0rem;
+        top: .70rem;
+        bottom: 0rem;
+    }
+    
+    #my-integral .integral-header-box > div {
+        display: inline-block;
+        width: 49%;
+        text-align: center;
+        height: 100%;
+    }
+    
+    #my-integral .border-r:after {
+        background-color: #e6dfc8;
+    }
+    #my-integral .vip-title{
+        font-size: .14rem;
+        color:#976c00;
+    }
+    #my-integral .vip-level{
+        font-size:.12rem;
+        color:#41310b;
+        padding-top: 4px;
+    }
+    #my-integral .integral-list-tr{
+        height: .6rem;
+        position: relative;
+        padding:.13rem .1rem;
+        background-color: white;
+    }
+    #my-integral .integral-list-row{
+
+    }
+    #my-integral .integral-content{
+        display:inline-block;
+        font-size:.14rem;
+        color:#313131;
+    }
+    #my-integral .integral-num{
+        display:inline-block; 
+        font-size:.14rem;
+        float: right;
+        color:#9f5c00;
+    }
+    #my-integral .get-integral-time{
+        font-size:.12rem;
+        color:#bcbcbc;
+    }
+    </style>
+    <script id="integral-list-template" type="text/x-underscore-template">
+         <div class="integral-list-tr border-b">
            <div class="integral-list-row">
                 <div class="integral-content">
                      注册赢好礼
@@ -12,4 +71,48 @@
                     2009-2-1
                 </div>
            </div>       
-        </div></script><div class=header><i class="icon-arrow-left-2 go-back"></i><h1>我的积分</h1></div><div class=container><div class=integral-header-box><div class=border-r><div class=vip-title>普通会员</div><div class=vip-level>当前等级</div></div><div><div class=vip-title>1000</div><div class=vip-level>当前积分</div></div></div><div id=integral-list class=listview><div class=scroller style=padding-bottom:50px><div class=pulldown><span class=icon></span><span class=label></span></div><ul class=ktmListContent></ul><button class=loadmore><div class=label>点击加载更多</div><span class=icon></span></button><div class=message><div class=empty>没有数据</div><div class=error>数据加载失败</div></div></div></div></div></div>
+        </div>
+    </script>
+    <div class="header">
+        <i class="icon-arrow-left-2 go-back"></i>
+        <h1>我的积分</h1>
+    </div>
+    <div class="container">
+        <div class="integral-header-box">
+            <div class='border-r'>
+                <div class = 'vip-title'>
+                    普通会员
+                </div>
+                <div class = 'vip-level'>
+                    当前等级
+                </div>
+            </div>
+            <div>
+                <div class = 'vip-title'>
+                    1000
+                </div>
+                <div class = 'vip-level'>
+                    当前积分
+                </div>
+            </div>
+        </div>
+       
+        <div id="integral-list" class="listview">
+            <div class="scroller" style='padding-bottom: 50px;'>
+                <div class="pulldown">
+                    <span class="icon"></span><span class="label"></span>
+                </div>
+                <ul class="ktmListContent">
+                </ul>
+                <button class="loadmore">
+                    <div class="label">点击加载更多</div>
+                    <span class="icon"></span>
+                </button>
+                <div class="message">
+                    <div class="empty">没有数据</div>
+                    <div class="error">数据加载失败</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

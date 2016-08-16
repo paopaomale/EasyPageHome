@@ -1,1 +1,58 @@
-define(["underscore"],function(a){var b=function(){this.queue=[],this.onSuccess=function(){},this.onFail=function(){}};return a.extend(b.prototype,{add:function(a){return a.index=this.queue.length,this.queue.push(a),this},success:function(a){return this.onSuccess=a,this},fail:function(a){return this.onFail=a,this},execute:function(){var a=this.queue.length,b=[],c=this;this.queue.forEach(function(d,e){d.execute(function(d){b[e]=d,0==--a&&c.onSuccess(b)},function(a){c.abort(),c.onFail(a)})})},abort:function(){this.queue.forEach(function(a){a.abort&&a.abort()})}}),b});
+define(['underscore'], function(_){
+	
+	var TaskQueue = function(){
+		this.queue = [];
+		//empty function
+		this.onSuccess = function(){};
+		this.onFail = function(){};
+	}
+
+	_.extend(TaskQueue.prototype, {
+
+		add: function(task){
+			task.index = this.queue.length;
+			this.queue.push(task);
+			return this;
+		},
+
+		success: function(callback){
+			this.onSuccess = callback;
+			return this;
+		},
+
+		fail: function(callback){
+			this.onFail = callback;
+			return this;
+		},
+
+		execute: function(){
+
+			var toBeDone = this.queue.length;
+			var resultArray = [];
+
+			var me = this;
+			this.queue.forEach(function(task, i){
+				
+				task.execute(function(result){
+					//collect result
+					resultArray[i] = result;
+					//all is done
+					if (--toBeDone == 0) {
+						me.onSuccess(resultArray);
+					};
+				}, function(err){
+					me.abort();
+					me.onFail(err);
+				});
+			});
+		},
+
+		abort: function(){
+			this.queue.forEach(function(task){
+				if (task.abort) task.abort();
+			});
+		}
+	});
+
+	return TaskQueue;
+});

@@ -1,1 +1,132 @@
-define(["underscore"],function(a){var b=function(){},c=b.prototype;c.init=function(){var a=$("#HUDContainer");this._loadingHUD=$("<div id='netLoadingHUD' style='position:absolute;background-color:transparent;pointer-events:none;z-index:1;width:100%;height:100%'><div id='HUDView' class='bf-chrysanthemum active'><div></div></div></div>"),a.append(this._loadingHUD),this._loadingIcon=this._loadingHUD.find("#HUDView"),this._loadingIcon.hide(),this._lc=0,this._mc=0,this._lv=1},c.show=function(a){return a=a?osUtil.clone(a,!0):{},this._incLoading(a.model),a._lv=this._lv,a},c.stop=function(a){return a?void(a._lv<this._lv||this._decLoading(a.model)):void this.reset()},c.reset=function(){this._loadingIcon.hide(),this._loadingHUD.css("pointer-events","none"),this._lc=0,this._mc=0,++this._lv},c._incLoading=function(a){1==this._incLoadingCount()&&this._loadingIcon.show(),a&&1==this._incModelCount()&&this._loadingHUD.css("pointer-events","auto")},c._decLoading=function(a){0==this._decLoadingCount()&&this._loadingIcon.hide(),a&&0==this._decModelCount()&&this._loadingHUD.css("pointer-events","none")},c._incLoadingCount=function(){return++this._lc,this._lc},c._decLoadingCount=function(){return--this._lc,this._lc=Math.max(this._lc,0),this._lc},c._incModelCount=function(){return++this._mc,this._mc},c._decModelCount=function(){return--this._mc,this._mc=Math.max(this._mc,0),this._mc};var d=new b;return d.init(),d});
+define(["underscore"], function(_)
+	{
+		var Indicator = function()
+		{
+
+		}
+
+		var Class = Indicator.prototype;
+		Class.init = function()
+		{
+			var root = $("#HUDContainer");
+			//this._loadingHUD = $("<div id='netLoadingHUD' style='position:absolute;background-color:transparent;pointer-events:none;z-index:10000000000000;width:100%;height:100%'><div id='HUDView'><div></div></div></div>");
+			this._loadingHUD = $("<div id='netLoadingHUD' style='position:absolute;background-color:transparent;pointer-events:none;z-index:1;width:100%;height:100%'><div id='HUDView' class='bf-chrysanthemum active'><div></div></div></div>");
+			
+			root.append(this._loadingHUD);
+			this._loadingIcon = this._loadingHUD.find('#HUDView');
+			this._loadingIcon.hide();
+			
+			this._lc = 0;
+			this._mc  = 0;
+			this._lv = 1;
+		}
+
+		Class.show = function(options)
+		{
+			if(!options)
+			{
+				options = {};
+			}
+			else
+			{
+				options = osUtil.clone(options, true);
+			}
+			this._incLoading(options.model);
+			options._lv = this._lv;
+
+			return options;
+		}
+
+		Class.stop = function(id)
+		{
+			if(!id)
+			{
+				this.reset();
+
+				return ;
+			}
+
+			if(id._lv < this._lv)
+			{
+				return ;
+			}
+
+			this._decLoading(id.model);
+		}
+
+		Class.reset = function()
+		{
+			this._loadingIcon.hide();
+			this._loadingHUD.css("pointer-events", "none");
+			this._lc = 0;
+			this._mc = 0;
+			
+			++this._lv;
+		}
+			
+		Class._incLoading = function(model) 
+		{
+			if(this._incLoadingCount() == 1)
+			{
+				this._loadingIcon.show();
+			}
+
+			if(model)
+			{
+				if(this._incModelCount() == 1)
+				{
+					this._loadingHUD.css("pointer-events", "auto");
+				}
+			}
+		}
+
+		Class._decLoading = function(model) 
+		{
+			if(this._decLoadingCount() == 0)
+			{
+				this._loadingIcon.hide();
+			}
+
+			if(model)
+			{
+				if(this._decModelCount() == 0)
+				{
+					this._loadingHUD.css("pointer-events", "none");
+				}
+			}
+		}
+
+		Class._incLoadingCount = function()
+		{
+			++this._lc;
+			return this._lc;
+		}
+
+		Class._decLoadingCount = function()
+		{
+			--this._lc;
+			this._lc = Math.max(this._lc, 0);
+			
+			return this._lc;
+		}
+
+		Class._incModelCount = function()
+		{
+			++this._mc;
+			
+			return this._mc;
+		}
+
+		Class._decModelCount = function()
+		{
+			--this._mc;
+			this._mc = Math.max(this._mc, 0);
+			
+			return this._mc;
+		}
+
+		var inst = new Indicator();
+		inst.init();
+		return inst;
+	}
+);

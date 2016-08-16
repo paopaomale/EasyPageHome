@@ -1,1 +1,77 @@
-define(["butterfly/view","butterfly","shared/js/datasource","listview/ListView","swipe","iscroll","main/main-client","dialog"],function(a,b,c,d,e,f,g,h){return a.extend({events:{"click .contentWarp":"selectItem"},render:function(){console.log("render1111")},onShow:function(){this.initAdSwipe(),this.initListview()},initListview:function(){var a=this;if(!this.listview){var b=new c({storage:"none",identifier:"investDatasource",url:g.DETAIL_URL,requestParams:{channelId:"123"}}),e=this.$("#CBListview"),f=_.template(a.$("#listview-template").html());this.listview=new d({id:"investListview",el:e,autoLoad:!0,itemTemplate:f,dataSource:b,isPullToRefresh:!1})}},initAdSwipe:function(){this.adSwipe||(this.adSwipe=this.$(".adSwipe").Swipe({startSlide:0,speed:3e3,auto:1e3,continuous:!0,disableScroll:!1,stopPropagation:!1,closeEndMotion:!0}))},selectItem:function(a){var b=$(a.currentTarget).attr("id");butterfly.navigate("main/main-message-detail.html",{id:b})}})});
+/*
+@ Author  江霖
+*/
+define([
+	'butterfly/view',
+	'butterfly',
+	'shared/js/datasource',
+	'listview/ListView',
+	'swipe',
+	'iscroll',
+	'main/main-client',
+	'dialog',
+	], 
+	function(View, Butterfly, DataSource, ListView, swipe, iscroll, mainClient, Dialog){
+
+	return View.extend({
+		events: {
+			"click .contentWarp": "selectItem",
+		},
+		render:function(){
+			console.log('render1111');
+		},
+		onShow: function(){
+			this.initAdSwipe();
+			this.initListview();
+		},
+		
+		// 初始化 listview
+		initListview: function(){
+			var me = this;
+			if(!this.listview){
+				var Datasource = new DataSource({
+					storage: 'none',
+					identifier: 'investDatasource',
+					url: mainClient.DETAIL_URL,
+					requestParams: {
+						channelId: '123'
+					}
+				});
+				var listEl = this.$('#CBListview');
+				var template = _.template(me.$("#listview-template").html());
+				this.listview = new ListView({
+					id: 'investListview',
+					el: listEl,
+					autoLoad: true,
+					itemTemplate: template,
+					dataSource: Datasource,
+					isPullToRefresh: false
+				});
+			}
+		},
+
+		//初始化 广告swipe
+		initAdSwipe: function(){
+			if(!this.adSwipe){
+				this.adSwipe = this.$('.adSwipe').Swipe({
+	                startSlide: 0,
+	                speed: 3000,
+	                auto: 1000,
+	                continuous: true,
+	                disableScroll: false,
+	                stopPropagation: false,
+	                closeEndMotion: true
+	            });
+			}
+		},
+
+		// 选择item
+		selectItem: function(e){
+			var id = $(e.currentTarget).attr('id');
+			butterfly.navigate('main/main-message-detail.html',{
+				id: id
+			});
+		}
+		
+	}); //view define
+});

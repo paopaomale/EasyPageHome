@@ -1,4 +1,56 @@
-<div id=my-message data-view=account/my-message><style type=text/css>#my-message .message-list-tr{width:100%;position:relative;height:.6rem;padding:.15rem .1rem .15rem .5rem;background-color:#fff}#my-message .message-list-tr-row-title{display:inline-block;font-size:.14rem;color:#323232}#my-message .message-list-tr-row-time{display:inline-block;float:right;font-size:.12rem;color:#939393}#my-message .message-list-tr-row-des{font-size:.12rem;color:#999;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}#my-message .message-list-tr-row-icon{display:inline-block;width:.3rem;height:.3rem;position:absolute;top:.15rem;left:.1rem}#my-message .message-list-tr-row-icon img{width:100%;height:100%;border-radius:20px;border-radius:.04rem;background:red}</style><script id=message-list-template type=text/x-underscore-template><div class="message-list-tr border-b">
+<div id="my-message" data-view="account/my-message">
+    <style type="text/css">
+    #my-message .message-list-tr {
+        width: 100%;
+        position: relative;
+        height: .6rem;
+        padding: .15rem .1rem .15rem .5rem;
+        background-color: white;
+    }
+    
+    #my-message .message-list-tr-row {}
+    
+    #my-message .message-list-tr-row-title {
+        display: inline-block;
+        font-size: .14rem;
+        color: #323232;
+    }
+    
+    #my-message .message-list-tr-row-time {
+        display: inline-block;
+        float: right;
+        font-size: .12rem;
+        color: #939393;
+    }
+    
+    #my-message .message-list-tr-row-des {
+        font-size: .12rem;
+	    color: #999999;
+	    overflow: hidden;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+    }
+    
+    #my-message .message-list-tr-row-icon {
+        /*border: .01rem solid;*/
+        display: inline-block;
+        width: .3rem;
+        height: .3rem;
+        position: absolute;
+        top: .15rem;
+        left: .1rem;
+        /*border-radius: .04rem;*/
+    }
+    #my-message .message-list-tr-row-icon img{
+    	width: 100%;
+    	height: 100%;
+	    border-radius: 20px;
+	    border-radius: .04rem;
+	    background: red;
+    }
+    </style>
+    <script id="message-list-template" type="text/x-underscore-template">
+        <div class="message-list-tr border-b">
             <div class="message-list-tr-row">
                 <div class="message-list-tr-row-title">
                     <%=title%>
@@ -15,4 +67,49 @@
             <div class="message-list-tr-row-icon">
             	<img src='<%=img%>'>
             </div>
-        </div></script><div class=header><i class="icon-arrow-left-2 go-back"></i><h1>我的消息</h1></div><div class=container><div id=message-list class=listview><div class=scroller style=padding-bottom:50px><div class=pulldown><span class=icon></span><span class=label></span></div><ul class=ktmListContent></ul><button class=loadmore><div class=label>点击加载更多</div><span class=icon></span></button><div class=message><div class=empty>没有数据</div><div class=error>数据加载失败</div></div></div></div></div></div>
+        </div>
+    </script>
+    <div class="header">
+        <i class="icon-arrow-left-2 go-back"></i>
+        <h1>我的消息</h1>
+    </div>
+    <div class="container">
+        <!--  <div id = 'message-list'>
+            
+            <div class="message-list-tr border-b">
+                <div class="message-list-tr-row">
+                    <div class="message-list-tr-row-title">
+                        fff
+                    </div>
+                    <div class="message-list-tr-row-time">
+                        今天晚上
+                    </div>
+                </div>
+                <div class="message-list-tr-row">
+                    <div class="message-list-tr-row-des">
+                        fff今天晚上今天晚上今天晚上今天晚上今天晚上今天晚上
+                    </div>
+                </div>
+                <div class="message-list-tr-row-icon">
+                </div>
+            </div>
+        </div> -->
+        <div id="message-list" class="listview">
+            <div class="scroller" style='padding-bottom: 50px;'>
+                <div class="pulldown">
+                    <span class="icon"></span><span class="label"></span>
+                </div>
+                <ul class="ktmListContent">
+                </ul>
+                <button class="loadmore">
+                    <div class="label">点击加载更多</div>
+                    <span class="icon"></span>
+                </button>
+                <div class="message">
+                    <div class="empty">没有数据</div>
+                    <div class="error">数据加载失败</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,422 @@
-define(["butterfly/components/dialog/zepto_extend","butterfly/components/dialog/parseTpl","css!butterfly/components/dialog/dialog.css","css!butterfly/components/dialog/dialog.default.css"],function(){function a(a){this.tpl={close:'<a class="ui-dialog-close" title="关闭"><span class="ui-icon ui-icon-delete"></span></a>',mask:'<div class="ui-mask"></div>',title:'<div class="ui-dialog-title"><h3><%=title%></h3></div>',wrap:'<div class="ui-dialog"><div class="ui-dialog-content"></div><% if(btns){ %><div class="ui-dialog-btns"><% for(var i=0, length=btns.length; i<length; i++){var item = btns[i]; %><a class="ui-btn ui-btn-<%=item.index%>" data-key="<%=item.key%>"><%=item.text%></a><% } %></div><% } %></div> '},this.toastTpl={close:'<a class="ui-dialog-close" title="关闭"><span class="ui-icon ui-icon-delete"></span></a>',mask:"",wrap:'<div class="ui-dialog" style="background: #363636; color: #fff;margin:0 10px"><div class="ui-dialog-content" style="padding:4px 10px;font-size: 16px;border-radius: 9px;"></div></div> '},this._options={autoOpen:!0,buttons:null,closeBtn:!1,mask:!0,width:300,height:"auto",title:null,content:null,scrollMove:!0,container:null,maskClick:null,position:null},this.getWrap=function(){return this._options._wrap},this._init=function(a){a?(this.tpl=this.toastTpl,this._options.isToast=!0):this._options.isToast=!1;var b=d(".ui-dialog");if(0===b.length||"visible"!==window.getComputedStyle(b[b.length-1]).getPropertyValue("visibility")){var c,e=this,f=e._options,g=0,h=d.proxy(e._eventHandler,e),i={};d(document).ready(function(){f._container=d(f.container||document.body),(f._cIsBody=f._container.is("body"))||f._container.addClass("ui-dialog-container"),i.btns=c=[],f.buttons&&d.each(f.buttons,function(a){c.push({index:++g,text:a,key:a})}),f._mask=f.mask?d(e.tpl.mask).appendTo(f._container):null,f._wrap=d(d.parseTpl(e.tpl.wrap,i)).appendTo(f._container),f._content=d(".ui-dialog-content",f._wrap),f._title=d(e.tpl.title),f._close=f.closeBtn&&d(tpl.close).highlight("ui-dialog-close-hover"),e.$el=e.$el||f._content,e.title(f.title),e.content(f.content),c.length&&d(".ui-dialog-btns .ui-btn",f._wrap).highlight("ui-state-hover"),f._wrap.css({width:f.width,height:f.height}),d(window).on("ortchange",h),f._wrap.on("click",h),f._mask&&f._mask.on("click",h),f.autoOpen&&e.open()}),f._wrap.bind("animationend  webkitAnimationEnd  oAnimationEnd  MSAnimationEnd",function(a){"disappear"===a.animationName&&(f._wrap.css("visibility","hidden"),f.autoOpen&&e.destroy())})}},this._create=function(){var a=this._options;this._options.setup&&(a.content=a.content||this.$el.show(),a.title=a.title||this.$el.attr("title"))},this._eventHandler=function(a){var b,c,e,f=this,g=f._options;switch(a.type){case"ortchange":this.refresh();break;case"touchmove":g.scrollMove&&a.preventDefault();break;case"click":if(g._mask&&(d.contains(g._mask[0],a.target)||g._mask[0]===a.target))return;c=g._wrap.get(0),(b=d(a.target).closest(".ui-dialog-close",c))&&b.length?f.close():(b=d(a.target).closest(".ui-dialog-btns .ui-btn",c))&&b.length&&(e=g.buttons[b.attr("data-key")],e&&e.apply(f,arguments))}},this._calculate=function(){var a,b,c=this,e=c._options,f=document.body,g={},h=e._cIsBody,i=Math.round;return e.mask&&(g.mask=h?{width:"100%",height:Math.max(f.scrollHeight,f.clientHeight)-1}:{width:"100%",height:"100%"}),a=e._wrap.offset(),b=d(window),g.wrap={left:"50%",marginLeft:-i(a.width/2)+"px",top:h?i(b.height()/2)+window.pageYOffset:"50%",marginTop:-i(a.height/2)+"px"},c._options.isToast&&(g.wrap={left:"50%",marginLeft:-i(a.width/2)+"px",top:"200px",marginTop:-i(a.height/2)+"px"}),g},this.refresh=function(){var a,b,c=this,e=c._options;return e._isOpen&&(b=function(){e._wrap.css("-webkit-animation","null"),e._wrap.css("animation","null"),a=c._calculate(),a.mask&&e._mask.css(a.mask),e._wrap.css(a.wrap),e._wrap.css("-webkit-animation"," bounceOut 0.1s"),e._wrap.css("animation"," bounceOut 0.1s")},d.os.ios&&document.activeElement&&/input|textarea|select/i.test(document.activeElement.tagName)?(document.body.scrollLeft=0,setTimeout(b,200)):b()),c};var b=this;this._listenDomRemoved=function(a){var c=b;if(a.target){var e=d(a.target).find(c.$el);e&&e.length>0&&(d(document).off("touchmove",c._eventHandler),document.removeEventListener("DOMNodeRemoved",c._listenDomRemoved))}},this.open=function(a,b){var c=this._options;if(!c._isOpen&&c._wrap){c._isOpen=!0,c._wrap.css("visibility","visible"),c._mask&&c._mask.css("visibility","visible"),void 0!==a&&this.position?this.position(a,b):this.refresh();var e=this;d(document).on("touchmove",d.proxy(e._eventHandler,e)),document.addEventListener("DOMNodeRemoved",this._listenDomRemoved,!1)}},this.close=function(){var a=this._options;a._wrap&&(a._isOpen=!1,a._wrap.css("-webkit-animation"," disappear 0.2s"),a._wrap.css("animation"," disappear 0.2s"),a._mask&&a._mask.css("visibility","hidden"),d(document).off("touchmove",this._eventHandler))},this.title=function(a){var b=this._options,c=void 0!==a;return c&&(a=(b.title=a)?"<h3>"+a+"</h3>":a,b._title.html(a)[a?"prependTo":"remove"](b._wrap),b._close&&b._close.prependTo(b.title?b._title:b._wrap)),c?this:b.title},this.content=function(a){var b=this._options,c=void 0!==a;return c&&b._content.empty().append(b.content=a),c?this:b.content},this.destroy=function(){var a=this._options,b=this._eventHandler;d(window).off("ortchange",b),d(document).off("touchmove",b),a._wrap.off("click",b).remove(),a._mask&&a._mask.off("click",b).remove(),a._close&&a._close.highlight()},void 0!==a.autoOpen&&(this._options.autoOpen=a.autoOpen),a.buttons&&(this._options.buttons=a.buttons),void 0!==a.mask&&(this._options.mask=a.mask),void 0!==a.closeBtn&&(this._options.closeBtn=a.closeBtn),a.width&&(this._options.width=a.width),a.height&&(this._options.height=a.height),a.title&&(this._options.title=a.title),a.content&&(this._options.content=a.content),void 0!==a.scrollMove&&(this._options.scrollMove=a.scrollMove),a.container&&(this._options.container=a.container),a.maskClick&&(this._options.maskClick=a.maskClick),a.position&&(this._options.position=a.position)}function b(b,c){var d=new a({content:b});d._options.width="auto",d._init(!0),c||(c=3e3),setTimeout(function(){d.close()},c)}function c(b){if(0==d(".ui-dialog-btns").length){var c=new a(b);return c._init(),c}}var d=Zepto;return{showToast:b,createDialog:c}});
+/**
+ * @file 弹出框组件
+ * 用法：     引入插件为dialog后,详细参数请见下面的 this._options
+             同一个页面只能同时显示一个弹出框
+              var  d=dialog.createDialog({
+                        autoOpen: false, //默认为true
+                        buttons: {
+                            '取消': function(){
+                                this.close();
+                            },
+                            '确定': function(){
+                                me.alertexit();
+                                this.close(); //所有逻辑最好放在关闭之前
+                            }
+                        },
+                        content:'是否退去程序?',
+                        title:'提示'
+                    });
+                d.open();
+                ---------------------
+                Toast的用法,后面的时间也可以不填，默认3秒后自动关闭
+                dialog.showToast("这是显示内容",3000);
+
+
+ */
+ define([
+    'butterfly/components/dialog/zepto_extend',
+    'butterfly/components/dialog/parseTpl',
+    'css!butterfly/components/dialog/dialog.css',
+    'css!butterfly/components/dialog/dialog.default.css'],
+    function(){
+        var $ = Zepto;
+        function dialog(opts){
+            this.tpl = {
+                close: '<a class="ui-dialog-close" title="关闭"><span class="ui-icon ui-icon-delete"></span></a>',
+                mask: '<div class="ui-mask"></div>',
+                title: '<div class="ui-dialog-title">'+
+                '<h3><%=title%></h3>'+
+                '</div>',
+                wrap: '<div class="ui-dialog">'+
+                '<div class="ui-dialog-content"></div>'+
+                '<% if(btns){ %>'+
+                '<div class="ui-dialog-btns">'+
+                '<% for(var i=0, length=btns.length; i<length; i++){var item = btns[i]; %>'+
+                '<a class="ui-btn ui-btn-<%=item.index%>" data-key="<%=item.key%>"><%=item.text%></a>'+
+                '<% } %>'+
+                '</div>'+
+                '<% } %>' +
+                '</div> '
+            };
+            this.toastTpl= {
+                close: '<a class="ui-dialog-close" title="关闭"><span class="ui-icon ui-icon-delete"></span></a>',
+                mask: '',
+                wrap: '<div class="ui-dialog" style="background: #363636; color: #fff;margin:0 10px">'+
+                '<div class="ui-dialog-content" style="padding:4px 10px;font-size: 16px;border-radius: 9px;"></div>'+
+                '</div> '
+            }
+//            console.log(this.tpl);
+
+            this._options= {
+            /**
+             * @property {Boolean} [autoOpen=true] 初始化后是否自动弹出
+             * @namespace options
+             */
+             autoOpen: true,
+            /**
+             * @property {Array} [buttons=null] 弹出框上的按钮
+             * @namespace options
+             */
+             buttons: null,
+            /**
+             * @property {Boolean} [closeBtn=true] 是否显示关闭按钮
+             * @namespace options
+             */
+             closeBtn: false,
+            /**
+             * @property {Boolean} [mask=true] 是否有遮罩层
+             * @namespace options
+             */
+             mask: true,
+            /**
+             * @property {Number} [width=300] 弹出框宽度
+             * @namespace options
+             */
+             width: 300,
+            /**
+             * @property {Number|String} [height='auto'] 弹出框高度
+             * @namespace options
+             */
+             height: 'auto',
+            /**
+             * @property {String} [title=null] 弹出框标题
+             * @namespace options
+             */
+             title: null,
+            /**
+             * @property {String} [content=null] 弹出框内容
+             * @namespace options
+             */
+             content: null,
+            /**
+             * @property {Boolean} [scrollMove=true] 是否禁用掉scroll，在弹出的时候
+             * @namespace options
+             */
+             scrollMove: true,
+            /**
+             * @property {Element} [container=null] 弹出框容器
+             * @namespace options
+             */
+             container: null,
+            /**
+             * @property {Function} [maskClick=null] 在遮罩上点击时触发的事件
+             * @namespace options
+             */
+             maskClick: null,
+            position: null //需要dialog.position插件才能用
+        };
+        /**
+         * 获取最外层的节点
+         * @method getWrap
+         * @return {Element} 最外层的节点
+         */
+         this.getWrap= function(){
+            return this._options._wrap;
+        };
+
+        this._init= function(isToast){
+            if(isToast){
+              this.tpl=this.toastTpl
+              this._options.isToast=true;
+            } else{
+              this._options.isToast=false;
+            }
+            //判断新建弹出框的时候，是否已经有在显示的弹出框
+            var dList=$('.ui-dialog');
+            if(dList.length!==0&&
+                window.getComputedStyle(dList[dList.length-1]).getPropertyValue('visibility')==='visible') return;
+
+            var me = this, opts = me._options, btns,
+            i= 0, eventHanlder = $.proxy(me._eventHandler, me), vars = {};
+
+            $(document).ready(function() {
+                opts._container = $(opts.container || document.body);
+                (opts._cIsBody = opts._container.is('body')) || opts._container.addClass('ui-dialog-container');
+                vars.btns = btns= [];
+                opts.buttons && $.each(opts.buttons, function(key){
+                    btns.push({
+                        index: ++i,
+                        text: key,
+                        key: key
+                    });
+                });
+                opts._mask = opts.mask ? $(me.tpl.mask).appendTo(opts._container) : null;
+                opts._wrap = $($.parseTpl(me.tpl.wrap, vars)).appendTo(opts._container);
+                opts._content = $('.ui-dialog-content', opts._wrap);
+
+                opts._title = $(me.tpl.title);
+                opts._close = opts.closeBtn && $(tpl.close).highlight('ui-dialog-close-hover');
+                me.$el = me.$el || opts._content;//如果不需要支持render模式，此句要删除
+
+                me.title(opts.title);
+                me.content(opts.content);
+
+                btns.length && $('.ui-dialog-btns .ui-btn', opts._wrap).highlight('ui-state-hover');
+                opts._wrap.css({
+                    width: opts.width,
+                    height: opts.height
+                });
+
+                //bind events绑定事件
+                $(window).on('ortchange', eventHanlder);
+                opts._wrap.on('click', eventHanlder);
+                opts._mask && opts._mask.on('click', eventHanlder);
+                opts.autoOpen && me.open();
+                });
+                //绑定动画播放完毕触发的回调
+                 opts._wrap.bind("animationend  webkitAnimationEnd  oAnimationEnd  MSAnimationEnd",
+                 function(args){
+                    if(args.animationName==='disappear'){
+                        opts._wrap.css('visibility','hidden');
+                        if(opts.autoOpen) me.destroy();
+                    };
+                 });
+            };
+
+            this._create= function(){
+                var opts = this._options;
+
+                if( this._options.setup ){
+                    opts.content = opts.content || this.$el.show();
+                    opts.title = opts.title || this.$el.attr('title');
+                }
+            };
+
+            this._eventHandler=function(e){
+                var me = this, match, wrap, opts = me._options, fn;
+                switch(e.type){
+                    case 'ortchange':
+                    this.refresh();
+                    break;
+                    case 'touchmove':
+                    opts.scrollMove && e.preventDefault();
+                    break;
+                    case 'click':
+                    if(opts._mask && ($.contains(opts._mask[0], e.target) || opts._mask[0] === e.target )){
+                        // this.close();
+                        return;
+                    }
+                    wrap = opts._wrap.get(0);
+                    if( (match = $(e.target).closest('.ui-dialog-close', wrap)) && match.length ){
+                        me.close();
+                    } else if( (match = $(e.target).closest('.ui-dialog-btns .ui-btn', wrap)) && match.length ) {
+                        fn = opts.buttons[match.attr('data-key')];
+                        fn && fn.apply(me, arguments);
+                    }
+                }
+            };
+
+            this._calculate= function(){
+                var me = this, opts = me._options, size, $win, root = document.body,
+                ret = {}, isBody = opts._cIsBody, round = Math.round;
+
+                opts.mask && (ret.mask = isBody ? {
+                    width:  '100%',
+                height: Math.max(root.scrollHeight, root.clientHeight)-1//不减1的话uc浏览器再旋转的时候不触发resize.奇葩！
+                    }:{
+                        width: '100%',
+                        height: '100%'
+                    });
+
+                size = opts._wrap.offset();
+                $win = $(window);
+                ret.wrap = {
+                    left: '50%',
+                    marginLeft: -round(size.width/2) +'px',
+                     top: isBody?round($win.height() / 2) + window.pageYOffset:'50%',
+                    marginTop: -round(size.height/2) +'px'
+                }
+                if(me._options.isToast){
+                   ret.wrap = {
+                        left: '50%',
+                        marginLeft: -round(size.width/2) +'px',
+//                         top: isBody?round($win.height()*2 / 3) + window.pageYOffset:'50%',
+                       top:'200px', //toast显示在上半部分
+                        marginTop: -round(size.height/2) +'px'
+                    }
+                }
+                return ret;
+            };
+
+        /**
+         * 用来更新弹出框位置和mask大小。如父容器大小发生变化时，可能弹出框位置不对，可以外部调用refresh来修正。
+         * @method refresh
+         * @return {self} 返回本身
+         */
+         this.refresh= function(){
+            var me = this, opts = me._options, ret, action;
+            if(opts._isOpen) {
+
+                action = function(){
+                    opts._wrap.css("-webkit-animation","null");
+                    opts._wrap.css("animation","null");
+                    ret = me._calculate();
+                    ret.mask && opts._mask.css(ret.mask);
+                    opts._wrap.css(ret.wrap);
+                    opts._wrap.css("-webkit-animation"," bounceOut 0.1s");
+                    opts._wrap.css("animation"," bounceOut 0.1s");
+                }
+
+                //如果有键盘在，需要多加延时
+                if( $.os.ios &&
+                    document.activeElement &&
+                    /input|textarea|select/i.test(document.activeElement.tagName)){
+
+                    document.body.scrollLeft = 0;
+                    setTimeout(action, 200);//do it later in 200ms.
+
+                } else {
+                    action();//do it now
+                }
+            }
+            return me;
+        };
+
+        var _this = this;
+
+        this._listenDomRemoved = function(e) {
+            var me =  _this;
+            if (e.target) {
+                var elems = $(e.target).find(me.$el);
+                if (elems && elems.length > 0) {
+                    $(document).off('touchmove', me._eventHandler);
+                    document.removeEventListener('DOMNodeRemoved', me._listenDomRemoved);
+                }
+            }
+        };
+
+        /**
+         * 弹出弹出框，如果设置了位置，内部会数值转给[position](widget/dialog.js#position)来处理。
+         * @method open
+         * @param {String|Number} [x] X轴位置
+         * @param {String|Number} [y] Y轴位置
+         * @return {self} 返回本身
+         */
+        this.open= function(x, y){
+            var opts = this._options;
+            if(opts._isOpen||!opts._wrap) return;
+            opts._isOpen = true;
+
+            opts._wrap.css('visibility', 'visible');
+            opts._mask && opts._mask.css('visibility', 'visible');
+
+            x !== undefined && this.position ? this.position(x, y) : this.refresh();
+
+            var me = this;
+            $(document).on('touchmove', $.proxy(me._eventHandler, me));
+
+            document.addEventListener('DOMNodeRemoved', this._listenDomRemoved , false);
+            /*me.$el.on('remove', function(){
+                alert('remove dialog');
+                $(document).off('touchmove', me._eventHandler);
+            });*/
+        };
+
+        /**
+         * 关闭弹出框
+         * @method close
+         * @return {self} 返回本身
+         */
+        this.close=function(){
+            var  opts = this._options;
+            if(!opts._wrap) return;
+            opts._isOpen = false;
+            opts._wrap.css("-webkit-animation"," disappear 0.2s");
+            opts._wrap.css("animation"," disappear 0.2s");
+            opts._mask && opts._mask.css('visibility', 'hidden');
+
+            $(document).off('touchmove', this._eventHandler);
+
+        };
+
+        /**
+         * 设置或者获取弹出框标题。value接受带html标签字符串
+         * @method title
+         * @param {String} [value] 弹出框标题
+         * @return {self} 返回本身
+         */
+         this.title= function(value) {
+            var opts = this._options, setter = value !== undefined;
+            if(setter){
+                value = (opts.title = value) ? '<h3>'+value+'</h3>' : value;
+                opts._title.html(value)[value?'prependTo':'remove'](opts._wrap);
+                opts._close && opts._close.prependTo(opts.title? opts._title : opts._wrap);
+            }
+            return setter ? this : opts.title;
+        };
+
+        /**
+         * 设置或者获取弹出框内容。value接受带html标签字符串和zepto对象。
+         * @method content
+         * @param {String|Element} [val] 弹出框内容
+         * @return {self} 返回本身
+         */
+         this.content= function(val) {
+            var opts = this._options, setter = val!==undefined;
+            setter && opts._content.empty().append(opts.content = val);
+            return setter ? this: opts.content;
+        };
+
+        /**
+         * @desc 销毁组件。
+         * @name destroy
+         */
+        this.destroy= function(){
+            var opts = this._options, _eventHander = this._eventHandler;
+            $(window).off('ortchange', _eventHander);
+            $(document).off('touchmove', _eventHander);
+            opts._wrap.off('click', _eventHander).remove();
+            opts._mask && opts._mask.off('click', _eventHander).remove();
+            opts._close && opts._close.highlight();
+        };
+
+        opts.autoOpen!==undefined&&(this._options.autoOpen=opts.autoOpen);
+        opts.buttons&&(this._options.buttons=opts.buttons);
+        opts.mask!==undefined&&(this._options.mask=opts.mask);
+        opts.closeBtn!==undefined&&(this._options.closeBtn=opts.closeBtn);
+        opts.width&&(this._options.width=opts.width);
+        opts.height&&(this._options.height=opts.height);
+        opts.title&&(this._options.title=opts.title);
+        opts.content&&(this._options.content=opts.content);
+        opts.scrollMove!==undefined&&(this._options.scrollMove=opts.scrollMove);
+        opts.container&&(this._options.container=opts.container);
+        opts.maskClick&&(this._options.maskClick=opts.maskClick);
+        opts.position&&(this._options.position=opts.position);
+    };
+    /*
+    默认显示3秒
+    */
+    function  showToast(msg,times){
+        var d=new dialog({
+                content:msg
+            });
+        d._options.width='auto';
+        d._init(true);
+        //
+        if(!times)times=3000;
+        setTimeout(function(){
+            d.close();
+        },times);
+    }
+    function  createDialog(opts){
+        //同时只能显示一个dialog
+            if($('.ui-dialog-btns').length!=0)return;
+            var d=new dialog(opts);
+            d._init();
+            return d;
+        };
+    return {
+        showToast:showToast,
+        createDialog:createDialog
+    };
+});

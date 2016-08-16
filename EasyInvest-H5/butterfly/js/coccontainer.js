@@ -1,1 +1,25 @@
-define(["./container"],function(a){return a.extend({route:function(a,b){if(a){var c=this;Butterfly.ViewLoader.loadView(a,function(a){c.contentView&&(c.contentView.hide(),c.contentView.remove()),c.contentView=a,a.render(),c.el.appendChild(a.el),a.show()})}}})});
+define(['./container'], function(Container){
+
+	return Container.extend({
+
+		route: function(paths, params){
+			
+			if (!paths) return;
+
+			var me = this;
+			Butterfly.ViewLoader.loadView(paths, function(viewObject){
+				//replace contentView
+				if (me.contentView) {
+					me.contentView.hide();
+					me.contentView.remove();
+				}
+				
+				me.contentView = viewObject;
+
+				viewObject.render();
+				me.el.appendChild(viewObject.el);
+				viewObject.show();
+			});
+		}
+	});
+});

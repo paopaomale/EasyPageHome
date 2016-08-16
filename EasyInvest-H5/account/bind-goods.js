@@ -1,1 +1,24 @@
-define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({events:{"click .go-back":"goBack"},render:function(){console.log("render")},onShow:function(){console.log("render")}})});
+/**
+ * [description]
+ * 绑定产品
+ * @FileName   account/bind-goods.js
+ * @Author     lichanglong
+ */
+define([
+	'butterfly/view',
+	'butterfly',
+	], 
+	function(View, Butterfly, ViewTemplate){
+
+	return View.extend({
+		events: {
+			"click .go-back": "goBack"
+		},
+		render:function(){
+			console.log('render');
+		},
+		onShow: function(){
+			console.log('render');
+		}
+	}); //view define
+});

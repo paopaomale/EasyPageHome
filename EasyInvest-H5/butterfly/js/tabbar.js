@@ -1,1 +1,32 @@
-define(["require","underscore","./container","butterfly"],function(a,b,c,d){return c.extend({route:function(a,b){var c=this,e=a.split("/"),f=this.routes[e.shift()];f&&d.ViewLoader.loadView(f,function(a){c.contentView&&(c.contentView.hide(),c.contentView.remove()),c.contentView=a,a.render(),c.el.querySelector("[data-role='tab-content']").appendChild(a.el),a.show(),e.length>0&&a.route(e.join("/"),b)})}})});
+define(['require', 'underscore', './container', 'butterfly'], 
+	function(require, _, Container, Butterfly){
+  
+  return Container.extend({
+
+		route: function(paths, params){
+			var me = this;
+			
+			var array = paths.split('/');
+			var target = this.routes[array.shift()];
+
+			if (!target) return;
+
+			Butterfly.ViewLoader.loadView(target, function(viewObject){
+				//replace contentView
+				if (me.contentView) {
+					me.contentView.hide();
+					me.contentView.remove();
+				}
+				
+				me.contentView = viewObject;
+
+				viewObject.render();
+				me.el.querySelector("[data-role='tab-content']").appendChild(viewObject.el);
+				viewObject.show();
+
+				if (array.length > 0) viewObject.route(array.join('/'), params);
+			});
+		}
+		
+  });
+});

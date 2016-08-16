@@ -1,1 +1,25 @@
-define(["butterfly/StackView"],function(a){return a.extend({route:function(b,c){var d=0,e=this.checkBackLevel();if(e>0)for(var f=this.stack.length-e-1;f>=0;f--,d++){var g=this.stack[f];if(!g.options||!g.options.isPopupView)break}d>0?setTimeout(function(){window.history.go(-d,c)},0):a.prototype.route.apply(this,arguments)}})});
+define(['butterfly/StackView'], function(StackView) {
+  return StackView.extend({
+    route: function(paths, options) {
+      var cnt = 0;
+      var backLevel = this.checkBackLevel();
+      
+      if (backLevel > 0) {  // 回退到最近一个非PopupView
+        for (var i = this.stack.length-backLevel-1; i >= 0; i--,cnt++) {
+          var elem = this.stack[i];
+          if(!elem.options || !elem.options.isPopupView) {
+            break;
+          }
+        }
+      }
+
+      if(cnt > 0) {
+        setTimeout(function(){
+          window.history.go(-cnt,options);
+        },0);
+      }else {
+        StackView.prototype.route.apply(this, arguments);
+      }
+    }
+  });
+});

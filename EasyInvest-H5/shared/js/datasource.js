@@ -1,1 +1,36 @@
-define(["listview/DataSource","shared/js/client"],function(a,b){return a.extend({ajaxLoadData:function(a){var c=this;b.ajax({url:a.url,type:a.type||"GET",data:a.data,success:function(b){b&&0===b.result?(b.data&&(0===b.data.length||b.total===b.data.length+c.size()||b.data.length<a.data[c.options.pageSizeParam])&&c.setFinish(),a.success(b.data)):a.fail(b.data)},error:function(b,c){a.fail(b,c)}})}})});
+define(['listview/DataSource', 'shared/js/client'], function(DataSource, Client) {
+
+	return DataSource.extend({
+
+		ajaxLoadData: function(options) {
+
+			//不传pageSize参数
+			//			delete options.data[this.options.pageSizeParam];
+
+			var me = this;
+			Client.ajax({
+				url: options.url,
+				type: options.type || 'GET',
+				data: options.data,
+				success: function(response) {
+					if (response && response.result === 0) {
+						//mark as finish
+						if (response.data && (response.data.length === 0
+						  || response.total === response.data.length + me.size() 
+						  || response.data.length < options.data[me.options.pageSizeParam]) ) 
+						{
+							me.setFinish();
+						};
+						//callback
+						options.success(response.data);
+					} else {
+						options.fail(response.data);
+					}
+				},
+				error: function(xhr, status) {
+					options.fail(xhr, status);
+				}
+			});
+		}
+	});
+});
