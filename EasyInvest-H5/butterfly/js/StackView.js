@@ -1,1 +1,211 @@
-define(["butterfly/view"],function(a){var b={slideInRight:{go:"slideInRight",back:"slideOutRight"},slideInUp:{go:"slideInUp",back:"slideOutDown"},slideInDown:{go:"slideInDown",back:"slideOutUp"},fadeIn:{go:"fadeIn",back:"fadeOut"},fadeInUp:{go:"fadeInUp",back:"fadeOutDown"},fadeInDown:{go:"fadeInDown",back:"fadeOutUp"},fadeInDownBig:{go:"fadeInDownBig",back:"fadeOutUpBig"},fadeInUpBig:{go:"fadeInUpBig",back:"fadeOutDownBig"},fadeInRight:{go:"fadeInRight",back:"fadeOutRight"},fadeInRightBig:{go:"fadeInRightBig",back:"fadeOutRightBig"}},c="viewchanged",d=function(a,b,d,e){a?(b.onHide(),d.onShow(e),b.remove(),b.onDestroy&&b.onDestroy()):(b.onHide(),d.onShow(e)),window.butterfly.trigger(c,{isGoBack:a,currentView:b,nextView:d,options:e})},e=function(a,c,e,f){var g=f&&f.effect;if(void 0===g&&(g="slideInRight"),null!==g&&"object"==typeof g){var h=a?g.back:g.go;"function"==typeof h?h(c,e,function(){d(a,c,e,f)}):d(a,c,e,f)}else if("string"==typeof g&&b[g]){var i=a?b[g].back:b[g].go,j=a?c:e;i?j.animate(i,function(){d(a,c,e,f)}):d(a,c,e,f)}else d(a,c,e,f)};return a.extend({initialize:function(b){a.prototype.initialize.apply(this,arguments),this.stack=[],this.baseZIndex=100,this.routedOnce=!1},render:function(){_.each(this.stack,function(a){a.view.render()})},onShow:function(a){var b=this.stack[this.stack.length-1].view;b.onShow(a)},addSubview:function(b,c){a.prototype.addSubview.apply(this,arguments),b.$el.css({position:"absolute",top:"0px",bottom:"0px",width:"100%","z-index":this.baseZIndex++}),this.stack.push({path:"",view:this.subviews[0]})},currentView:function(){return this.stack.length>1?this.stack[this.stack.length-1].view:void 0},checkBackLevel:function(a){void 0===a&&(a=window.location.hash);for(var b=0,c=this.stack.length-2;c>=0;c--)if(this.stack[c].path==a){b=this.stack.length-c-1;break}return b},backTo:function(a,b){"string"==typeof a&&"#"!=a[0]&&(a="#"+a);var c=this.checkBackLevel(a);0===c?console.log("backTo: 回退的url不正确"):window.history.go(-c,b)},route:function(a,b){var c=this;if(1==this.stack.length&&!a)return void(this.routedOnce=!0);var f=this.checkBackLevel(),g=this.stack[this.stack.length-1].view;if(f>0){for(var h=this.stack[this.stack.length-1-f],i=h.view,j=f;j>0;){var k=this.stack.pop();f>j&&(k.view.onHide(),k.view.remove()),j--,this.baseZIndex--}b=_.extend(h.options||{},b),b.isBack=!0,e(!0,g,i,b)}else require(["view!"+a],function(a){var f=new a;f.$el.css({position:"absolute",top:"0px",bottom:"0px",width:"100%","z-index":c.baseZIndex++}),setTimeout(function(){c.stack.push({path:window.location.hash,view:f,options:b})},0),f.render(b),c.el.appendChild(f.el),c.routedOnce?e(!1,g,f,b):d(!1,g,f,b),c.routedOnce=!0},function(a){alert("页面加载失败")})}})});
+define(['butterfly/view'], function(View) {
+
+  var animations = {
+    slideInRight: { go: "slideInRight", back: "slideOutRight" },
+    slideInUp: { go:  "slideInUp", back: "slideOutDown" },
+    slideInDown: { go:  "slideInDown", back: "slideOutUp" },
+    fadeIn: { go: "fadeIn", back: "fadeOut" },
+    fadeInUp: { go: "fadeInUp", back: "fadeOutDown" },
+    fadeInDown: { go: "fadeInDown", back: "fadeOutUp" },
+    fadeInDownBig: { go: "fadeInDownBig", back: "fadeOutUpBig" },
+    fadeInUpBig: { go: "fadeInUpBig", back: "fadeOutDownBig" },
+    fadeInRight: { go: "fadeInRight", back: "fadeOutRight" },
+    fadeInRightBig: { go: "fadeInRightBig", back: "fadeOutRightBig" }
+  };
+
+  var viewChangedEvent = "viewchanged";
+
+  var animationFinished = function(isGoBack, currentView, nextView, options) {
+    if(isGoBack) {
+      currentView.onHide();
+      nextView.onShow(options);
+      currentView.remove();
+      //移除View的时候调用一个onDestroy的回调
+      if(currentView.onDestroy)currentView.onDestroy();
+    }else {
+      currentView.onHide();
+      nextView.onShow(options);
+    }
+    window.butterfly.trigger(viewChangedEvent, {
+      isGoBack:isGoBack,
+      currentView: currentView,
+      nextView:nextView,
+      options: options
+    });
+  };
+
+  var doAnimate = function(isGoBack, currentView, nextView, options) {
+    var effect = options && options.effect;
+
+    if(effect === undefined) effect = "slideInRight";
+
+    if (effect !== null && typeof effect === "object") {
+      var action = isGoBack ? effect.back : effect.go;
+      if(typeof action === "function") {
+        action(currentView, nextView ,function() {
+          animationFinished(isGoBack, currentView, nextView, options);
+        });
+      }else {
+        animationFinished(isGoBack, currentView, nextView, options);
+      }
+    }else if(typeof effect === "string" && animations[effect]) {
+      var anim = isGoBack ? animations[effect].back:animations[effect].go;
+      var view = isGoBack ? currentView:nextView;
+      if(anim) {
+        view.animate(anim, function(){
+          animationFinished(isGoBack, currentView, nextView, options);
+        });
+      }else {
+        animationFinished(isGoBack, currentView, nextView, options);
+      }
+    }else {
+      animationFinished(isGoBack, currentView, nextView, options);
+    }
+  };
+
+  //show only contain one direct subview
+  return View.extend({
+
+    initialize: function(options) {
+      View.prototype.initialize.apply(this, arguments);
+
+      // stack to store the views, [{path: 'a', view: a}, {path: 'b', view: b}]
+      this.stack = [];
+      this.baseZIndex = 100;
+
+      // using this variable to indicate this container has routed once already
+      // to stop the animation from first route
+      // this check is no needed for normal case
+      this.routedOnce = false;
+    },
+
+    render: function() {
+      _.each(this.stack, function(item) {
+        item.view.render();
+      });
+    },
+
+    //pass on the 'onShow' event to the top subview
+    onShow: function(options) {
+      var currentView = this.stack[this.stack.length - 1].view;
+      currentView.onShow(options);
+    },
+
+    addSubview: function(view,options) {
+      View.prototype.addSubview.apply(this, arguments);
+      view.$el.css({
+        'position': 'absolute',
+        'top': '0px',
+        'bottom': '0px',
+        'width': '100%',
+        'z-index': this.baseZIndex++
+      });
+
+      this.stack.push({path: "", view: this.subviews[0]});
+    },
+
+    currentView: function() {
+      if(this.stack.length>1) {
+        return this.stack[this.stack.length-1].view;
+      }
+    },
+
+    // 检查回退的级数,不传参表示检查当前url.返回0表示不是回退
+    checkBackLevel: function(url) {
+      if(url === undefined) url = window.location.hash;
+      var level = 0;
+      for (var i = this.stack.length - 2; i >= 0; i--) {
+        if(this.stack[i].path == url) {
+          level = this.stack.length - i -1;
+          break;
+        }
+      };
+      return level;
+    },
+
+    backTo: function(dest, options) {
+      if(typeof dest === "string" && dest[0] != "#") {
+        dest = "#" + dest;
+      }
+      var level = this.checkBackLevel(dest);
+      if(level === 0) {
+        console.log('backTo: 回退的url不正确');
+      }else {
+        window.history.go(-level, options);
+      }
+    },
+
+    route: function(paths, options) {
+      var me = this;
+
+      if (this.stack.length == 1 && !paths) {
+        this.routedOnce = true;
+        return;
+      }
+
+      // check is this route is intent to go back,and get back level
+      var backLevel = this.checkBackLevel();
+      // 2 top views in the stack
+      var currentView = this.stack[this.stack.length -1].view;
+
+      if (backLevel > 0) {
+
+        var elem = this.stack[this.stack.length-1-backLevel];
+        var nextView = elem.view;
+        var popCnt = backLevel;
+        //将原来的elem变量修改为popelem,因为原来的elem与上面的elem重复
+        while(popCnt > 0) {
+          var popelem = this.stack.pop();
+          if(popCnt < backLevel)  {
+            popelem.view.onHide();
+            popelem.view.remove();
+          }
+          popCnt--;
+          this.baseZIndex--;
+        }
+
+        options = _.extend(elem.options || {}, options);
+        //返回标识参数
+        options.isBack = true;
+
+        //show next
+        doAnimate(true, currentView, nextView, options);
+
+      } else {
+
+        //load view using butterfly plugin
+        require(['view!' + paths], function(ViewClass){
+
+          var newView = new ViewClass();
+          newView.$el.css({
+            'position': 'absolute',
+            'top': '0px',
+            'bottom': '0px',
+            'width': '100%',
+            'z-index': me.baseZIndex++
+          });
+          //to fix weChat browser bug
+        setTimeout(function(){
+          me.stack.push({path: window.location.hash, view: newView, options: options});
+        },0);
+          newView.render(options);
+          me.el.appendChild(newView.el);
+
+          //如果是第一次route，则不显示动画
+          if (me.routedOnce) {
+            doAnimate(false, currentView, newView, options);
+          }else {
+            animationFinished(false, currentView, newView, options);
+          }
+
+          me.routedOnce = true;
+        }, function(err){
+          //TODO: without trigger
+          //window.history.back();
+          alert('页面加载失败');
+        });
+
+      }
+    }
+  });
+});

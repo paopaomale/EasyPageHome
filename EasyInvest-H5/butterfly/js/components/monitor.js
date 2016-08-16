@@ -1,1 +1,230 @@
-define(["jquery","underscore","backbone"],function(a,b,c){var d,e,f,g,h=1,i="in_view",j="in_app",k="enter_app",l="got_event",m=new Date,n=void 0===window.localStorage.monitor_firsttime,o=c.View.prototype.delegateEvents,p=/^(\S+)\s*(.*)$/,q=[],r=function(a){if(!a)return"";var c=b.find(q,function(b){return 0===a.indexOf(b.name)});return c?c.module.identifier:a},s=function(c){if(d){var f=b.find(d.options.whitelist,function(a){return"*"==a||a==c.type});if(void 0===f)return;var g=a(c.target),h=g.attr("id")||g.prop("outerHTML");d.gather(r(e),1,l,{timestamp:new Date,path:e,target:h,type:c.type})}};window.localStorage.setItem("monitor_firsttime",!1);var t=function(c,d){if(!c.appId||!c.url)throw new Error("创建Monitor的options至少要包含appId和url");var e=this;e.events=void 0===localStorage.monitor_events?[]:JSON.parse(localStorage.monitor_events),e.options=a.extend({},c),e.options.whitelist=b.union(["click"],[]||c.whitelist),e.timer=setInterval(function(){e.submit()},d||3e4)};t.prototype.gather=function(a,b,c,d){return!c||isNaN(b)?void console.log("monitor warning: invalid params"):(this.events.push({moduleId:a,name:c,type:b,extra:d}),void window.localStorage.setItem("monitor_events",JSON.stringify(this.events)))},t.prototype.appData=function(a){return void 0===a?this.appData:void(this.appData=a)},t.prototype.submit=function(){if(this.events&&0!=this.events.length){var b=this;a.ajax({url:b.options.url,type:"POST",dataType:"json",contentType:"application/json; charset=UTF-8",data:JSON.stringify({version:h,appId:b.options.appId,events:b.events,appData:b.appData}),success:function(){console.log("monitor submit success"),b.events=[],window.localStorage.setItem("monitor_events","[]")},error:function(){console.log("monitor submit error")}})}},c.View.prototype.delegateEvents=function(a){if(o.apply(this,arguments),!a&&!(a=b.result(this,"events")))return this;for(var c in a){var d=c.match(p),e=d[1],f=d[2];e+=".delegateEvents"+this.cid,""===f?this.$el.on(e,s):this.$el.on(e,f,s)}return this},console.log("monitor delegate...");var u=function(a,b){var c,d=0,e=function(a){b&&b(a)},f=function(b){if(b.isDirectory){var f=b.name;b.getFile("package.json",{create:!1},function(b){console.log("getFile ok:%o",b),console.log("loadFile %s",b.nativeURL.replace(a,"")),require(["json!"+b.nativeURL.replace(a,"")],function(a){console.log("load moduleInfo %s: %o",f,a),q.push({name:f,module:a}),++d===c&&e()},function(a){++d===c&&e()})},function(a){++d===c&&e(),console.log("monitor getFile error: %s",a)})}else++d===c&&e()};window.resolveLocalFileSystemURL=window.resolveLocalFileSystemURL||window.webkitResolveLocalFileSystemURL,window.device&&window.resolveLocalFileSystemURL||e(),window.resolveLocalFileSystemURL(a,function(b){console.log("monitor: %s",a),b.createReader().readEntries(function(a){c=a.length;for(var b=0,d=c;d>b;b++)f(a[b])},function(){e("readEntries error.")})},function(a){e("resolveLocalFileSystemURL error")})};c.history.on("route",function(a,b,c){var h=c[0];d&&e&&f&&(g=((new Date).getTime()-f.getTime())/1e3,d.gather(r(h),0,i,{path:h,timespan:g})),e=h,f=new Date}),document.addEventListener("resume",function(){setTimeout(function(){d&&(console.log("resume : %o",d.events),d.gather("",1,k,{timestamp:new Date,firsttime:!1})),m=new Date},0)}),document.addEventListener("pause",function(){if(d){var a=((new Date).getTime()-m.getTime())/1e3;d.gather("",0,j,{timespan:a}),d.submit()}});var v=function(a){return d||(a.rootDir&&u(a.rootDir),d=new t(a,a.interval),d.gather("",1,k,{timestamp:m,firsttime:n})),d};return{create:v}});
+define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+	var VERSION = 1.0;
+
+	var EVT_IN_VIEW = "in_view";
+	var EVT_IN_APP = "in_app";
+	var EVT_ENTER_APP = "enter_app";
+	var EVT_GOT_EVENT = "got_event";
+
+	var monitor;
+	var resumeTime = new Date();
+	var firsttime = window.localStorage.monitor_firsttime === undefined;
+	var delegateEvents = Backbone.View.prototype.delegateEvents;
+	var delegateEventSplitter = /^(\S+)\s*(.*)$/;
+
+	var lastPath, timestamp, span;
+	var moduleInfos = [];
+
+	var getModuleId = function(path) {
+		if(!path) return "";
+		var result = _.find(moduleInfos, function(moduleInfo) {
+			return path.indexOf(moduleInfo.name) === 0;
+		});
+		return result ? result.module.identifier:path;
+	};
+
+	var gatherEvent = function(evt) {
+		if(monitor) {
+			// 检查事件是否在白名单中
+			var result = _.find(monitor.options.whitelist, function(elem) {
+				return elem == '*' || elem == evt.type;
+			});
+			if(result === undefined) 
+				return;
+			
+			var el = $(evt.target);
+			var target = el.attr('id') || el.prop('outerHTML');
+			monitor.gather(getModuleId(lastPath), 1, EVT_GOT_EVENT, {
+				timestamp: new Date(),
+				path: lastPath,
+				target: target,
+				type: evt.type
+			});
+		}
+	};
+
+	window.localStorage.setItem('monitor_firsttime', false);
+
+	var Monitor = function(options, interval) {
+		if (!options.appId || !options.url) {
+			throw new Error('创建Monitor的options至少要包含appId和url')
+		}
+		var me = this;
+		me.events = localStorage.monitor_events === undefined ? []:JSON.parse(localStorage.monitor_events);
+		me.options = $.extend({}, options);
+		me.options.whitelist = _.union(['click'], [] || options.whitelist);
+
+		me.timer = setInterval(function() {
+			me.submit();
+		}, interval || 30000);
+	};
+
+	// type: 0 or 1, 0 is timespan event, 1 is timestamp event
+	Monitor.prototype.gather = function(moduleId, type, name, extra) {
+		if (!name || isNaN(type)) {
+			console.log('monitor warning: invalid params');
+			return;
+		}
+		this.events.push({
+			moduleId: moduleId,
+			name: name,
+			type: type,
+			extra: extra
+		});
+		window.localStorage.setItem('monitor_events', JSON.stringify(this.events));
+	};
+
+	// extra app data while submit package
+	Monitor.prototype.appData = function(data) {
+		if (data === undefined) {
+			return this.appData;
+		}else {
+			this.appData = data;
+		}
+	};
+
+	Monitor.prototype.submit = function() {
+		if (!this.events || this.events.length == 0)
+			return;
+
+		var me = this;
+
+		$.ajax({
+			url: me.options.url,
+			type: 'POST',
+			dataType: 'json',
+			contentType:'application/json; charset=UTF-8',
+			data: JSON.stringify({ version: VERSION, appId: me.options.appId, events: me.events, appData: me.appData }),
+			success: function() {
+				console.log("monitor submit success");
+				me.events = [];
+				window.localStorage.setItem('monitor_events', '[]');
+			},
+			error: function() {
+				console.log("monitor submit error");
+			}
+		});
+	};
+
+	// 替换Backbone方法,收集View中的事件
+	Backbone.View.prototype.delegateEvents = function(events) {
+		delegateEvents.apply(this, arguments);
+
+		if (!(events || (events = _.result(this, 'events')))) return this;
+		for (var key in events) {
+			var match = key.match(delegateEventSplitter);
+			var eventName = match[1],
+				selector = match[2];
+			eventName += '.delegateEvents' + this.cid;
+			if (selector === '') {
+				this.$el.on(eventName, gatherEvent);
+			} else {
+				this.$el.on(eventName, selector, gatherEvent);
+			}
+		}
+		return this;
+	};
+
+	console.log('monitor delegate...');
+
+	// 搜索并加载各H5模块的package.json
+	var scanModuleInfos = function(rootDir, callback) {
+		var cnt = 0, all;
+		var done = function(err) {
+			if(callback) callback(err);
+		};
+		var searchModule = function(moduleEntry) {
+			if (moduleEntry.isDirectory) {
+				var moduleName = moduleEntry.name;
+				moduleEntry.getFile('package.json', {
+					create: false
+				}, function(entry) {
+					console.log('getFile ok:%o', entry);
+					console.log('loadFile %s', entry.nativeURL.replace(rootDir, ''));
+					require(['json!' + entry.nativeURL.replace(rootDir, '')], function(moduleInfo) {
+						console.log('load moduleInfo %s: %o', moduleName, moduleInfo);
+						moduleInfos.push({ name: moduleName, module: moduleInfo });
+						if(++cnt === all) done();
+					},function(err) {
+						if(++cnt === all) done();
+					});
+				}, function(err) {
+					if(++cnt === all) done();
+					console.log('monitor getFile error: %s', err);
+				});
+			}else {
+				if(++cnt === all) done();
+			}
+		};
+		window.resolveLocalFileSystemURL = window.resolveLocalFileSystemURL || window.webkitResolveLocalFileSystemURL;
+		if (!window.device || !window.resolveLocalFileSystemURL) {
+			done();
+		}
+		window.resolveLocalFileSystemURL(rootDir, function(fs) {
+			console.log('monitor: %s', rootDir);
+			fs.createReader().readEntries(function(entries) {
+				all = entries.length;
+				for (var i = 0, len = all; i < len; i++) 
+					searchModule(entries[i]);
+			}, function() {
+				done('readEntries error.');
+			});
+		}, function(err) {
+			done('resolveLocalFileSystemURL error');
+		});
+	}
+
+	Backbone.history.on('route', function(router, name, args) {
+		var path = args[0];
+		if (monitor && lastPath && timestamp) {
+			span = ((new Date()).getTime() - timestamp.getTime()) / 1000;
+			monitor.gather(getModuleId(path), 0, EVT_IN_VIEW, {
+				path: path,
+				timespan: span
+			});
+		}
+		lastPath = path;
+		timestamp = new Date();
+	});
+
+	document.addEventListener("resume", function() {
+		setTimeout(function() {
+			if (monitor) {
+				console.log('resume : %o',monitor.events);
+				monitor.gather("", 1, EVT_ENTER_APP, {
+					timestamp: new Date(),
+					firsttime: false
+				});
+			}
+			resumeTime = new Date();
+		}, 0);
+	});
+
+	document.addEventListener("pause", function() {
+		if (monitor) {
+			var span = ((new Date()).getTime() - resumeTime.getTime()) / 1000;
+			monitor.gather("", 0, EVT_IN_APP, {
+				timespan: span
+			});
+			monitor.submit();
+		}
+	});
+
+	var createMonitor = function(options) {
+		if (!monitor) {
+			if (options.rootDir) {
+				scanModuleInfos(options.rootDir);
+			}
+			monitor = new Monitor(options, options.interval);
+			monitor.gather("", 1, EVT_ENTER_APP, {
+				timestamp: resumeTime,
+				firsttime: firsttime
+			});
+		}
+		return monitor;
+	}
+
+	return {
+		create: createMonitor
+	}
+});
