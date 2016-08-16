@@ -1,0 +1,705 @@
+{
+    "result": 0,
+    "total": 7,
+    "data": [{
+        "id": 1,
+        "tid": "remai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 2,
+        "tid": "remai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 3,
+        "tid": "remai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 4,
+        "tid": "remai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 5,
+        "tid": "remai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 6,
+        "tid": "remai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "remai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "remai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "remai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "remai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "jiulei",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "jiulei",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "jiulei",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "jiulei",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "jiulei",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "jiulei",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "jiulei",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "jiulei",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "jiulei",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "jiulei",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "zhijin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "zhijin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "zhijin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "zhijin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "zhijin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "zhijin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "zhijin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "zhijin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "zhijin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "zhijin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "niunai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "niunai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "niunai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "niunai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "niunai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "niunai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "niunai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "niunai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "niunai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "niunai",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "lipin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "lipin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "lipin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "lipin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "lipin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "lipin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "lipin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "lipin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "lipin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "lipin",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "yinliao",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "yinliao",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "yinliao",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "yinliao",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "yinliao",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "yinliao",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "yinliao",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "yinliao",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "yinliao",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "yinliao",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "mianshi",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "mianshi",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "mianshi",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "mianshi",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "mianshi",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "mianshi",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "mianshi",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "mianshi",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "mianshi",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }, {
+        "id": 7,
+        "tid": "mianshi",
+        "img": "缩略图图片url地址",
+        "name": "商品名称",
+        "price": "商品原价",
+        "payment": "商品现价(应支付价)",
+        "offline": "商品是否已下线",
+        "createTime": "发布时间"
+
+    }]
+}

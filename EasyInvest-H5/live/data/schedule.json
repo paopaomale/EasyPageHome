@@ -2,44 +2,44 @@
    "result":0,
    "total":15,
    "data":[{
-         "starttime":"13:15:00",
-         "endtime":"14:15:00",
+         "starttime":"13:15",
+         "endtime":"14:15",
          "startDay":"2015-05-12",
          "endDay":"2015-05-12",
          "teacher":"周立波"
   },{
-         "starttime":"13:15:00",
-         "endtime":"14:15:00",
+         "starttime":"13:15",
+         "endtime":"14:15",
+         "startDay":"2015-05-12",
+         "endDay":"2015-05-13",
+         "teacher":"周立波"
+  },{
+         "starttime":"13:15",
+         "endtime":"14:15",
          "startDay":"2015-05-12",
          "endDay":"2015-05-12",
          "teacher":"周立波"
   },{
-         "starttime":"13:15:00",
-         "endtime":"14:15:00",
+         "starttime":"13:15",
+         "endtime":"14:15",
          "startDay":"2015-05-12",
          "endDay":"2015-05-12",
          "teacher":"周立波"
   },{
-         "starttime":"13:15:00",
-         "endtime":"14:15:00",
+         "starttime":"13:15",
+         "endtime":"14:15",
          "startDay":"2015-05-12",
          "endDay":"2015-05-12",
          "teacher":"周立波"
   },{
-         "starttime":"13:15:00",
-         "endtime":"14:15:00",
+         "starttime":"13:15",
+         "endtime":"14:15",
          "startDay":"2015-05-12",
          "endDay":"2015-05-12",
          "teacher":"周立波"
   },{
-         "starttime":"13:15:00",
-         "endtime":"14:15:00",
-         "startDay":"2015-05-12",
-         "endDay":"2015-05-12",
-         "teacher":"周立波"
-  },{
-         "starttime":"13:15:00",
-         "endtime":"14:15:00",
+         "starttime":"13:15",
+         "endtime":"14:15",
          "startDay":"2015-05-12",
          "endDay":"2015-05-12",
          "teacher":"周立波"

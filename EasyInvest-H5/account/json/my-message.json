@@ -1,0 +1,35 @@
+{
+    "result": 0,
+    "total": 3,
+    "data": [{
+        "id": 10,
+        "type": 0,
+        "title": "注册的积分（系统公告）",
+        "img": "../account/img/guide-login-logo.png",
+        "dateFrom": "",
+        "dateTo": "",
+        "content": "注册的积分，三个月内有效，使用规则反反复复方法撒上了飞机啊谁来打飞机啊睡懒觉发生的浪费",
+        "redirect": "",
+        "timestamp": ""
+    }, {
+        "id": 10,
+        "type": 1,
+        "title": "注册的积分（提醒）",
+        "img": "../account/img/guide-login-logo.png",
+        "dateFrom": "",
+        "dateTo": "",
+        "content": "注册的积分，三个月内有效，使用规则反反复复方法撒上了飞机啊谁来打飞机啊睡懒觉发生的浪费",
+        "redirect": "",
+        "timestamp": ""
+    }, {
+        "id": 10,
+        "type": 2,
+        "title": "注册的积分(通知)",
+        "img": "../account/img/guide-login-logo.png",
+        "dateFrom": "",
+        "dateTo": "",
+        "content": "注册的积分，三个月内有效，使用规则反反复复方法撒上了飞机啊谁来打飞机啊睡懒觉发生的浪费",
+        "redirect": "",
+        "timestamp": ""
+    }]
+}

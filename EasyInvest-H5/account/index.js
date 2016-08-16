@@ -1,1 +1,1 @@
-define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({swipe:null,events:{"click #go":"close"},render:function(){console.log("f")}})});
+define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({swipe:null,events:{"click .account-group-row":"navigateUrl"},render:function(){console.log("f")},onShow:function(){},navigateUrl:function(a){var b=$(a.currentTarget).attr("data-value").trim();b?butterfly.navigate(b):alert("正在完善，敬请期待！")}})});

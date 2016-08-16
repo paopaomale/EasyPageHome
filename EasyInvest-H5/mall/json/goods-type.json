@@ -1,0 +1,33 @@
+{
+    "result": 0,
+    "total": 7,
+    "data": [{
+        "id": "remai",
+        "name": "热卖"
+
+    },{
+        "id": "jiulei",
+        "name": "酒类"
+
+    },{
+        "id": "zhijin",
+        "name": "纸巾"
+
+    },{
+        "id": "niunai",
+        "name": "牛奶"
+
+    },{
+        "id": "lipin",
+        "name": "礼品"
+
+    },{
+        "id": "yinliao",
+        "name": "饮料"
+
+    },{
+        "id": "mianshi",
+        "name": "面食"
+
+    }]
+}
