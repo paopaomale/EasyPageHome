@@ -42,7 +42,7 @@ define(['jquery', 'underscore', 'backbone','./ListViewTemplateItem', 'dialog','.
 					scrollX: false,
 					scrollY: true,
 					mouseWheel: true,
-					click: isAndroid,//安卓端 才click = true;
+					// click: isAndroid,//安卓端 才click = true;
 					isPullToRefresh: this.isPullToRefresh
 				});
 
