@@ -1,6 +1,1 @@
-define(['shared/js/client'], function (BaseClient) {
-    return _.extend(BaseClient, {
-    	// DETAIL_URL: BaseClient.basePath + '/info/detail',
-    	DETAIL_URL: '../main/data/main-listview.json',
-    })
-})
+define(["shared/js/client"],function(a){return _.extend(a,{DETAIL_URL:"../main/data/main-listview.json"})});
