@@ -1,0 +1,1 @@
+define(["butterfly/view","butterfly","text!campaign/campaign-register.html"],function(a,b,c){return a.extend({swipe:null,events:{"click .go-back":"goBack","click #registe-button":"onRegiste"},onRegiste:function(a){butterfly.navigate("account/register.html")}})});

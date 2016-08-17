@@ -1,0 +1,1 @@
+define(["butterfly/view","butterfly","text!campaign/campaign-share.html"],function(a,b,c){return a.extend({swipe:null,events:{"click .go-back":"goBack"}})});
