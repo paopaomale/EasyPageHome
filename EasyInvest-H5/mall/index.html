@@ -6,7 +6,7 @@
                             <img data-url="/otherimg/pic/2016/06/14/09/1465867450429" src="http://mall.changan.com.cn/goods-img/img/otherimg/pic/2016/08/01/10/1470018749675_900_450.jpg">
                         </div>
                         <div class="item-title">
-                            伊犁牛奶 安慕希常温酸奶
+                           <%=item[i].name%>
                         </div>
                         <div class="item-price">
                             100积分
@@ -19,7 +19,7 @@
         <%_.forEach(data,function(item){%>
             
         <%})%></script><script id=mall-menu-template type=text/x-underscore-template><%_.forEach(data,function(item){%>
-            <li class="menuLi border-t" goods-id='<%=item.id%>'>
+            <li class="menuLi border-t" id='<%=item.id%>'>
                 <%=item.name%>
             </li>
             <%})%></script><div class=header><i class="icon-arrow-left-2 go-back"></i><h1>商城</h1></div><div class=container><div id=adSwipe class="lazyload swiper-box"><div class=swiper-container><div class=swiper-wrapper><div class=swiper-slide data-index=0><img src=http://mall.changan.com.cn/goods-img/img/otherimg/pic/2016/07/22/12/1469161608662_900_450.jpg data-type=2></div><div class=swiper-slide data-index=1><img data-url=/otherimg/pic/2016/06/14/09/1465867450429 src=http://mall.changan.com.cn/goods-img/img/otherimg/pic/2016/08/01/10/1470018749675_900_450.jpg data-type=10></div><div class=swiper-slide data-index=2><img src=http://mall.changan.com.cn/goods-img/img/otherimg/pic/2016/08/01/10/1470018764517_900_450.jpg data-type=3></div></div><div class=addImg-pagination><span class=active></span> <span></span> <span></span></div></div></div><div class=menu-goods-box><div class=leftMenu-box><ul class=menuUl></ul></div><div class=goods-list-box><div class=goods-list></div></div></div></div></div>
