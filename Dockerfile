@@ -1,23 +1,46 @@
-#Build java web app container image
+# 签名
+MAINTAINER saymagic "saymagic@163.com"
 
-FROM docker.cn/docker/ubuntu:14.04
+# 安装JDK与nginx
+RUN apt-get update
+RUN apt-get install openjdk-7-jre -y
+RUN apt-get install openjdk-7-jdk -y
+RUN apt-get install nginx -y
 
-MAINTAINER chenchanghui<nuccch2010.163.com>
+#拷贝nginx配置文件
+ADD ./etc/nginx-conf /etc/nginx/conf.d
 
-#Make java and tomcat install directory
+#拷贝启动脚本
+ADD ./etc/scripts /usr/local
+RUN chmod a+x /usr/local/start.sh
 
-RUN mkdir /usr/local/java
+#拷贝Tomcat与maven安装包
+ADD ./soft /tmp
 
-RUN mkdir /usr/local/tomcat
+# 安装Tomcat 7
+RUN cd /usr/local && tar xzf /tmp/apache-tomcat-7.0.64.tar.gz
+RUN ln -s /usr/local/apache-tomcat-7.0.64 /usr/local/tomcat
+RUN rm /tmp/apache-tomcat-7.0.64.tar.gz
 
-#Copy jre and tomcat into image
+# 安装maven
+RUN cd /usr/local && tar xzf /tmp/apache-maven-3.1.1-bin.tar.gz
+RUN ln -s /usr/local/apache-maven-3.1.1 /usr/local/maven
+RUN rm /tmp/apache-maven-3.1.1-bin.tar.gz
 
-ADD jre1.8.0_31 /usr/local/java/
+RUN mkdir -p /webapp
+ADD ./webapp /webapp
 
-ADD apache-tomcat-6.0.35 /usr/local/tomcat/
+# 定义环境变量
+ENV TOMCAT_HOME /usr/local/tomcat
+ENV MAVEN_HOME /usr/local/maven
+ENV APP_HOME /webapp
 
-ADD start_tomcat.sh start_tomcat.sh
+#编译源代码与部署
+RUN cd /webapp && /usr/local/maven/bin/mvn package 
+RUN rm -rf $TOMCAT_HOME/webapps/*
+RUN cd /webapp && cp target/wx_server.war $TOMCAT_HOME/webapps/ROOT.war
 
-#Expose http port
+#启动Tomcat与Nginx
+CMD /usr/local/start.sh && tail -F /usr/local/tomcat/logs/catalina.out
 
-EXPOSE 8080
+EXPOSE 80 8080
