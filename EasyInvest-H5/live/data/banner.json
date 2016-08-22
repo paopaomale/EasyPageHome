@@ -1,0 +1,21 @@
+{
+   "result":0,
+   "total":3,
+   "data":[{
+      "id":101,
+        "img": "../live/img/adSwipe1.png",
+        "title":"",
+        "createTime":"2015-05-12"
+    },{
+      "id":102,
+      "img": "../account/img/guide-login-logo.png",
+      "title":"",
+      "createTime":"2015-05-12"
+        
+    },{
+      "id":103,
+      "img": "../live/img/adSwipe3.png",
+      "title":"",
+      "createTime":"2015-05-12"
+    }]
+}

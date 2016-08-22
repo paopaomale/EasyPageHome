@@ -1,0 +1,22 @@
+<div id=shippingAddressManagement data-view=account/shipping-address-management><style type=text/css>#shippingAddressManagement .container::-webkit-scrollbar{display:none}#shippingAddressManagement .addressManagementBox{padding:0 .1rem 0 .1rem;background-color:#fff;font-size:.14rem}#shippingAddressManagement .twoRow>div{display:block;word-break:break-all;word-wrap:break-word}#shippingAddressManagement .addressManagementBox .top{padding:.13rem 0 .13rem 0;height:.6rem;line-height:1}#shippingAddressManagement .boxRow{padding:0}#shippingAddressManagement .boxRow>div{display:inline-block}#shippingAddressManagement .scroller li{height:auto;background:#fff;border-bottom:0}#shippingAddressManagement .buttonStyle{border-radius:5px;padding:8px 19px;color:#5b5b5b;display:inline-block}#shippingAddressManagement .addressManagementBox .botton{padding:.14rem 1.29rem .14rem 0;position:relative;height:.45rem}#shippingAddressManagement .botton .buttonBox{position:absolute;right:0;top:50%;transform:translateY(-50%);-webkit-transform:translateY(-50%)}#shippingAddressManagement .defaultAddress{float:right;color:#bb9235}#shippingAddressManagement .address_icon{border-radius:.5rem;position:relative;padding-left:.02rem;top:.02rem;display:none;color:#fff}#shippingAddressManagement .address_iconBox{width:.18rem;height:.18rem;border:.01rem solid #d6d6d6;border-radius:.5rem;position:relative;margin-right:.05rem;position:absolute;left:0;top:-.03rem}#shippingAddressManagement #setDefaultAddress>div{display:inline-block}#shippingAddressManagement #setDefaultAddress{position:relative;padding:0 0 0 24px}#shippingAddressManagement #setDefaultAddress .check{background-size:100%;background-color:#b38f28;color:#fff;width:.18rem;height:.18rem}#shippingAddressManagement .container{background-color:#f2f2f2;height:100%}#shippingAddressManagement .header{background:#fff}#shippingAddressManagement{line-height:1}#shippingAddressManagement .loadmore{width:100%;border:0;margin-bottom:0;padding:10px 0;display:none}#shippingAddressManagement .oneRow{color:#363636;padding-bottom:.08rem}#shippingAddressManagement .twoRow{color:#989898}#shippingAddressManagement #addressManagementContent{padding-bottom:50px}#shippingAddressManagement .notData{text-align:center;padding:10px 0;font-size:14px}#shippingAddressManagement .newAddressBox{padding:.1rem;background-color:#fff;height:.6rem;bottom:0;position:fixed;width:100%}#shippingAddressManagement #newAddress{height:.4rem;padding:.12rem 0;line-height:1;background-color:#b59030;color:#fefeff;background-image:-webkit-gradient(linear,left top,left bottom,color-stop(.5,#b59030),to(#b59030));border-radius:.05rem}</style><script id=addressManagement_template type=text/x-underscore-template><li class = "addressLi border-t">
+		<div class = "addressManagementBox">
+			<div class = "top">
+				<div class = "boxRow oneRow">
+					<div class = "bold h3" ><%=receiver%></div>
+					<div class = "bold h3" ><%=mobile%></div>
+					<div class = "defaultAddress h3" style = "display:none">默认地址</div>
+				</div>
+				<div class = "boxRow twoRow">
+					<div class="h4" ><%=addressData.provinceName + addressData.cityName+addressData.areaName + address%>&nbsp;&nbsp;<%=zip%></div>
+				</div>
+			</div>
+			<div class = "botton border-t">
+				<div id = "setDefaultAddress" addressId = '<%=id%>'><div class = "address_iconBox"><i class="icon-checked address_icon"></i></div>设为默认地址</div>
+				<div class = "buttonBox">
+					<div id = "edit" class ="buttonStyle btn-xs btn" style = "margin-right: 9px;" addressData = '<%=JSON.stringify(obj)%>'>编辑</div>
+					<div id = "delete" class = "buttonStyle btn-xs btn" addressId = '<%=id%>'>删除</div>
+				</div>
+
+			</div>
+		</div>
+	</li></script><div class=header><i class="icon-arrow-left-2 go-back"></i><h1>收货地址管理</h1></div><div class=container><div id=addressManagementContent style=""></div></div><div class=newAddressBox><div class="btn-lg btn-full btn-secondary" id=newAddress>新建收货地址</div></div></div>

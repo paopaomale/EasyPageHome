@@ -1,0 +1,16 @@
+{
+   "result":0,
+   "total":3,
+   "data":[{
+      "id":101,
+        "img": "../campaign/img/share.png",
+        "title":"",
+        "createTime":"2015-05-12"
+    },{
+      "id":102,
+      "img": "../campaign/img/register.png",
+      "title":"",
+      "createTime":"2015-05-12"
+        
+    }]
+}

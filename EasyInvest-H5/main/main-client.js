@@ -1,1 +1,1 @@
-define(["shared/js/client"],function(a){return _.extend(a,{DETAIL_URL:"../main/data/main-listview.json"})});
+define(["shared/js/client"],function(a){return _.extend(a,{INFO_LIST_URL:"../main/data/main-listview.json",INFO_DETAIL_URL:"../main/data/detail.json",BANNER_LIST_URL:"../main/data/banner.json",MESSAGE_GET_URL:"../main/data/message.json"})});

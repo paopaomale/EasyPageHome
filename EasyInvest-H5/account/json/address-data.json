@@ -1,0 +1,31 @@
+{
+	"result": "0",
+	"total": 3,
+	"data": [{
+		"provinceId": "2",
+		"id": "e65f227cd4224eb3bce3baeaf3978406",
+		"zip": "111111",
+		"areaName": "fffff",
+		"receiver": "æˆ‘",
+		"cityId": "36",
+		"address": "æ–¹æ³•",
+		"cityName": "",
+		"provinceName": "",
+		"isDeafault": true,
+		"areaId": "373",
+		"mobile": "11111111111"
+	},{
+		"provinceId": "2",
+		"id": "e65f227cd4224eb3bce3baeaf3978406",
+		"zip": "111111",
+		"areaName": "wwwww",
+		"receiver": "æˆ‘",
+		"cityId": "36",
+		"address": "æ–¹æ³•",
+		"cityName": "",
+		"provinceName": "",
+		"isDeafault": true,
+		"areaId": "373",
+		"mobile": "11111111112"
+	}]
+}

@@ -1,1 +1,1 @@
-define(["shared/js/client"],function(a){return _.extend(a,{SCHEDULE_URL:"../live/data/schedule.json",BOOKING_URL:"../live/data/booking.json"})});
+define(["shared/js/client"],function(a){return _.extend(a,{BROADCAST_SCHEDULE_URL:"../live/data/schedule.json",BROADCAST_BOOKING_URL:"../live/data/booking.json",BROADCAST_INFO_URL:a.basePath+"/broadcast/info",BROADCAST_ROOMS_URL:"../live/data/live-new-listview1.json",BANNER_LIST_URL:"../live/data/banner.json",BROADCAST_VIDEO_URL:"../live/data/video-listview.json"})});
