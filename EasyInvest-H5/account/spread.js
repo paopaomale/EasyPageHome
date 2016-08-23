@@ -1,1 +1,1 @@
-define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({events:{"click .go-back":"goBack"},render:function(){console.log("render")},onShow:function(){console.log("render")}})});
+define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({events:{"click .go-back":"goBack","click #vip-rivileged":"vipRivileged"},render:function(){console.log("render")},onShow:function(){console.log("render")},vipRivileged:function(){butterfly.navigate("account/vip-rivileged.html")}})});

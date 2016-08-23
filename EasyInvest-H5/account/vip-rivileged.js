@@ -1,1 +1,1 @@
-define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({events:{"click .go-back":"goBack"},render:function(){console.log("render")},onShow:function(){console.log("render")}})});
+define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({events:{"click .go-back":"goBack","click #rivileged-rules":"rivilegedRules","click #getVip":"getVip"},render:function(){console.log("render")},onShow:function(){console.log("render")},rivilegedRules:function(){butterfly.navigate("account/integral-trading-rules.html")},getVip:function(){console.log("getVip")}})});
