@@ -1,1 +1,0 @@
-define(["butterfly/view","butterfly"],function(a,b,c){return a.extend({swipe:null,events:{"click .go-back":"goBack"},render:function(){console.log("f")},onShow:function(){}})});
