@@ -1,0 +1,10 @@
+{
+  "name": "mall",
+ 	"identifier":"mall",
+  "description": "",
+  "version": "1.2.0",
+  "dependencies": {},
+	"build" : 10,
+	"releaseNote": "mall",
+	"hidden" : false
+}

@@ -1,0 +1,10 @@
+{
+  "name": "main",
+ 	"identifier":"main",
+  "description": "",
+  "version": "1.2.0",
+  "dependencies": {},
+	"build" : 10,
+	"releaseNote": "main",
+	"hidden" : false
+}
