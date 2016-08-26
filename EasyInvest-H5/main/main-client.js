@@ -1,1 +1,1 @@
-define(["shared/js/client"],function(a){return _.extend(a,{INFO_LIST_URL:a.basePath+"/info/list",INFO_DETAIL_URL:a.basePath+"/info/detail",BANNER_TOP3_URL:a.basePath+"/banner/top3",MESSAGE_GET_URL:a.basePath+"/message/get"})});
+define(["shared/js/client"],function(a){return _.extend(a,{INFO_LIST_URL:"../main/data/main-listview.json",INFO_DETAIL_URL:"../main/data/detail.json",BANNER_TOP3_URL:"../main/data/banner.json",MESSAGE_GET_URL:"../main/data/message.json"})});
