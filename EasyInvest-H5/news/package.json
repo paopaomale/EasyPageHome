@@ -1,0 +1,10 @@
+{
+  "name": "news",
+ 	"identifier":"news",
+  "description": "",
+  "version": "1.2.0",
+  "dependencies": {},
+	"build" : 10,
+	"releaseNote": "news",
+	"hidden" : false
+}

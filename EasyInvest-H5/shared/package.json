@@ -1,6 +1,6 @@
 {
     "name": "shared",
-    "identifier": "caecapp.shared",
+    "identifier": "shared",
     "description": "",
     "version": "1.0.24",
     "dependencies": {},

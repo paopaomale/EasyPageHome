@@ -1,0 +1,10 @@
+{
+  "name": "live",
+ 	"identifier":"live",
+  "description": "",
+  "version": "1.2.0",
+  "dependencies": {},
+	"build" : 10,
+	"releaseNote": "live",
+	"hidden" : false
+}

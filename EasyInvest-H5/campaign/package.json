@@ -1,0 +1,10 @@
+{
+  "name": "campaign",
+ 	"identifier":"campaign",
+  "description": "",
+  "version": "1.2.0",
+  "dependencies": {},
+	"build" : 10,
+	"releaseNote": "campaign",
+	"hidden" : false
+}
