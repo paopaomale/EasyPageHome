@@ -11,16 +11,19 @@
             </div>
         </div></script><script id=level-template type=text/x-underscore-template><%
 			//用户会员等级，0：普通, 1:白银, 2:黄金
-			var vipLevel = '普通会员'
+			var vipLevel = '普通会员',imgSrc = '../account/img/vip-0-icon.png';
 			switch(rank){
 				case 0:
 				vipLevel = '普通会员';
+				imgSrc = '../account/img/vip-0-icon.png';
 				break;
 				case 1:
 				vipLevel = '白银会员';
+				imgSrc = '../account/img/vip-1-icon.png';
 				break;
 				case 2:
 				vipLevel = '黄金会员'
+				imgSrc = '../account/img/gold-vip-icon.png';
 				break;
 				default:
 				vipLevel = '普通会员'
@@ -28,7 +31,7 @@
 			}
 		%>
             <div class="level-td border-r" id = 'vipLevel'>
-                <img src="../account/img/gold-vip-icon.png" class='img-vip'>
+                <img src="<%=imgSrc%>" class='img-vip'>
                 <%=vipLevel%>
             </div>
             <div class="level-td" id = 'vipPoints'>
