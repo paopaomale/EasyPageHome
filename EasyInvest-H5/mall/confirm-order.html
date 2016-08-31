@@ -1,0 +1,53 @@
+<div id=confirm-order data-view=mall/confirm-order><style type=text/css>#confirm-order .goods-info{height:1rem;padding:.1rem .1rem .1rem 1rem;position:relative}#confirm-order .account-info{height:.6rem;position:relative;padding:.1rem .15rem .1rem 1rem}#confirm-order .feedback{position:relative;height:.45rem;padding:0 0 0 1rem}#confirm-order .feedback input{border:none;position:relative;width:100%;line-height:.45rem}#confirm-order .row-left{position:absolute;left:0;top:0}#confirm-order .goods-img{position:absolute;width:1rem;left:0;top:0;height:100%;padding:.1rem .2rem}#confirm-order .goods-img img{width:100%;height:100%}#confirm-order .contacts-info{line-height:.6rem;color:#343434}#confirm-order .account-info-icon{position:absolute;right:.1rem;line-height:.6rem;top:0}#confirm-order .feedback-desc{line-height:.45rem;color:#343434}#confirm-order #order-list{padding:0 .1rem;background-color:#fff;margin-bottom:.1rem}#confirm-order .sum-box{height:.5rem;position:relative}#confirm-order .sum-box-left{float:left;line-height:.5rem;left:0;color:#999}#confirm-order .sum-box-right{float:right;line-height:.5rem;right:0}#confirm-order .footer{position:fixed;bottom:0;height:.5rem;background-color:#fff}#confirm-order .container{background-color:#f4f4f4}#confirm-order .sum-num{line-height:.5rem}#confirm-order .confirm-pay{border:1px solid;background:#ff5e4c;color:#fff9fe;padding:.1rem .17rem;border-radius:.05rem;position:relative;top:.06rem;margin:0 .1rem 0 .1rem;float:right}#confirm-order .goods-info-price{color:#ff5c49}#confirm-order .get-goods-address{color:#929292}#confirm-order .name-phone{color:#343434}#confirm-order .total-price{color:#ff584c}#confirm-order .order-box{padding-bottom:.5rem}</style><script id=cart-list-template type=text/x-underscore-template><%debugger%>
+        
+            <div id="order-list" class=' border-b'>
+                <%
+                    var sum = 0;
+                for (var i = 0,len = obj.length; i < len; i++) {
+                %>
+                <div class="goods-info border-b" goods-id = '<%=obj[i].id%>'>
+                    <div class="goods-img">
+                        <img src="../account/img/guide-login-logo.png">
+                    </div>
+                    <div class="goods-info-name h3">
+                        <%=obj[i].name%>
+                    </div>
+                    <div class="goods-info-price h3">
+                       <%=obj[i].payment%>
+                    </div>
+                    <div class="good-info-num h3">
+                        <%var num = typeof obj[i].num == 'undefined'? '1':obj[i].num%>
+                      X <span class = 'order-num'><%=num%></span>
+                    </div>
+                </div>
+                <%sum = sum+obj[i].payment * num%>
+                <%};%>
+                <div class="account-info border-b">
+                    <div class="row-left contacts-info h3">
+                        收货人信息
+                    </div>
+                    <div class='name-phone h3'>
+                         <span class = 'order-name'>张三</span> <span class = 'order-phone'>18883670601</span>
+                    </div>
+                    <div class='get-goods-address h4'>
+                        <span class = 'order-address'>德玛西亚啦啦啦啦啦啦啦阿拉</span>
+                    </div>
+                    <div class="account-info-icon">
+                        <i class="icon-arrow-right"></i>
+                    </div>
+                </div>
+                <div class="feedback border-b">
+                    <div class="row-left feedback-desc h3">
+                        <span class = 'order-feedback'></span>买家留言
+                    </div>
+                    <input>
+                </div>
+                <div class="sum-box">
+                    <div class="sum-box-left h3">
+                        余额积分 15000
+                    </div>
+                    <div class="sum-box-right h3">
+                        合计：<span class='total-price h3'><%=sum%></span>
+                    </div>
+                </div>
+            </div></script><div class=header><i class="icon-arrow-left-2 go-back"></i><h1>确认订单</h1></div><div class=container><div class=order-box></div></div><div class=footer><button class=confirm-pay>确认支付</button><div class="sum-box-right sum-num h3">合计：<span class="total-price h3">0</span></div></div></div>

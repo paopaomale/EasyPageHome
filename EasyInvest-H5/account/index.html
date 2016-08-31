@@ -11,16 +11,19 @@
             </div>
         </div></script><script id=level-template type=text/x-underscore-template><%
 			//用户会员等级，0：普通, 1:白银, 2:黄金
-			var vipLevel = '普通会员'
+			var vipLevel = '普通会员',imgSrc = '../account/img/vip-0-icon.png';
 			switch(rank){
 				case 0:
 				vipLevel = '普通会员';
+				imgSrc = '../account/img/vip-0-icon.png';
 				break;
 				case 1:
 				vipLevel = '白银会员';
+				imgSrc = '../account/img/vip-1-icon.png';
 				break;
 				case 2:
 				vipLevel = '黄金会员'
+				imgSrc = '../account/img/gold-vip-icon.png';
 				break;
 				default:
 				vipLevel = '普通会员'
@@ -28,10 +31,10 @@
 			}
 		%>
             <div class="level-td border-r" id = 'vipLevel'>
-                <img src="../account/img/gold-vip-icon.png" class='img-vip'>
+                <img src="<%=imgSrc%>" class='img-vip'>
                 <%=vipLevel%>
             </div>
             <div class="level-td" id = 'vipPoints'>
                 <img src="../account/img/integral-icon.png" class='img-integral'>
                 <%=points%>积分
-            </div></script><div class=swipe style=height:100%><div class=header-box><i class=icon-profile></i><div class=account-name>立即登录</div><div class=account-about></div></div><div class="level h4"><div class="level-td border-r" id=vipLevel>会员等级</div><div class=level-td id=vipPoints>积分数</div></div><div class="account-group border-b"><div class="account-group-row border-b" data-value=#account/my-message.html><img src=../account/img/my-message-icon.png>我的消息 <i class=icon-arrow-right></i></div><div class="account-group-row border-b" data-value=#account/my-integral.html><img src=../account/img/my-integral.png>我的积分 <i class=icon-arrow-right></i></div><div class=account-group-row data-value=#account/my-goods.html><img src=../account/img/goods-icon.png>我的投资产品 <i class=icon-arrow-right></i></div></div><div class="account-group border-b"><div class="account-group-row border-b" data-value=#account/spread.html><img src=../account/img/get-integral-icon.png>推广赢积分 <i class=icon-arrow-right></i></div><div class="account-group-row border-b" data-value=#account/vip-rivileged.html><img src=../account/img/vip-rivileged.png>积分与会员权益 <i class=icon-arrow-right></i></div><div class="account-group-row border-b" data-value=#mall/index.html><img src=../account/img/integral-mall-icon.png>积分商城 <i class=icon-arrow-right></i></div><div class=account-group-row data-value=#account/shipping-address-management.html><img src=../account/img/integral-mall-icon.png>收货地址管理 <i class=icon-arrow-right></i></div></div><div class="account-group border-b"><div class="account-group-row border-b" data-value=#mall/shopping-cart.html><img src=../account/img/shopping-cart-icon.png>购物车管理 <i class=icon-arrow-right></i></div><div class="account-group-row border-b" data-value=#account/my-info-modify.html><img src=../account/img/my-info-edit.png>个人信息修改 <i class=icon-arrow-right></i></div><div class=account-group-row data-value><img src=../account/img/my-qrcode-icon.png>我的二维码 <i class=icon-arrow-right></i></div></div></div></div>
+            </div></script><div class=swipe style=height:100%><div class=header-box><i class=icon-profile></i><div class=account-name>立即登录</div><div class=account-about></div></div><div class="level h4"><div class="level-td border-r" id=vipLevel>会员等级</div><div class=level-td id=vipPoints>积分数</div></div><div class="account-group border-b"><div class="account-group-row border-b" data-value=#account/my-message.html><img src=../account/img/my-message-icon.png>我的消息 <i class=icon-arrow-right></i></div><div class="account-group-row border-b" data-value=#account/my-integral.html><img src=../account/img/my-integral.png>我的积分 <i class=icon-arrow-right></i></div><div class=account-group-row data-value=#account/my-goods.html><img src=../account/img/goods-icon.png>我的投资产品 <i class=icon-arrow-right></i></div></div><div class="account-group border-b"><div class="account-group-row border-b" data-value=#account/spread.html><img src=../account/img/get-integral-icon.png>推广赢积分 <i class=icon-arrow-right></i></div><div class="account-group-row border-b" data-value=#account/vip-rivileged.html><img src=../account/img/vip-rivileged.png>积分与会员权益 <i class=icon-arrow-right></i></div><div class="account-group-row border-b" data-value=#mall/index.html><img src=../account/img/integral-mall-icon.png>积分商城 <i class=icon-arrow-right></i></div><div class=account-group-row data-value=#account/shipping-address-management.html><img src=../account/img/integral-mall-icon.png>收货地址管理 <i class=icon-arrow-right></i></div></div><div class="account-group border-b"><div class="account-group-row border-b" data-value=#mall/shopping-cart.html><img src=../account/img/shopping-cart-icon.png>购物车管理 <i class=icon-arrow-right></i></div><div class="account-group-row border-b" data-value=#mall/my-order-list.html><img src=../account/img/shopping-cart-icon.png>我的订单 <i class=icon-arrow-right></i></div><div class="account-group-row border-b" data-value=#account/my-info-modify.html><img src=../account/img/my-info-edit.png>个人信息修改 <i class=icon-arrow-right></i></div><div class=account-group-row data-value><img src=../account/img/my-qrcode-icon.png>我的二维码 <i class=icon-arrow-right></i></div></div></div></div>
