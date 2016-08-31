@@ -1,0 +1,43 @@
+<div id=order-detail data-view=mall/order-detail><style type=text/css>#order-detail .container{background-color:#f4f4f4}#order-detail .order-detail-centent{padding:0 .1rem;width:100%;background:#fff}#order-detail .order-info{height:1rem;padding:.1rem .1rem .1rem 1rem;position:relative}#order-detail .goods-info-img{position:absolute;left:0;top:0;width:1rem;height:100%;padding:.1rem}#order-detail .goods-info-img img{height:100%;width:100%}#order-detail .border{width:100%;height:100%}#order-detail .leave-message{line-height:.45rem;height:.45rem}#order-detail .account-address{height:.6rem;padding:.12rem 0}#order-detail .address-name{line-height:1;padding-bottom:.06rem}#order-detail .address{line-height:1;color:#979797}#order-detail .order-sum-box{height:.85rem;padding:.1rem 0}#order-detail .goods-name{color:#353535}#order-detail .goods-price{color:#fe5f4a}#order-detail .goods-number{color:#959595}#order-detail .order-sum-row{color:#949494}#order-detail .order-sum-row .right{float:right}</style><script id=order-detail-template type=text/x-underscore-template><div class="order-detail-centent border-t border-b">
+          <%for (var i = 0,len = goods.length; i < len; i++) {
+          %>
+            <div class="order-info border-b">
+                <div class = 'goods-name h3'><%=goods[i].name%></div>
+                <div class = 'goods-price h3'><%=goods[i].payment%>积分</div>
+                <div class = ' h3'>x<%=goods[i].count%></div>
+                <div class = 'goods-number h4'>ET479292929</div>
+                 <div class = 'goods-info-img'>
+                    <div class="border">
+                         <img src="<%=window._serverBasePath+goods[i].img%>" class = 'border'>
+                    </div>
+                </div>
+            </div>
+          <%
+          };%>
+            
+            <div class="account-address border-b">
+                <div class = 'address-name h2'>
+                    <%=contact + "  "+phone%>
+                </div>
+                <div class = 'address h3'>
+                    <%=address%>
+                </div>
+            </div>
+            <div class="leave-message border-b h2">
+                买家留言  <span></span>
+            </div>
+            <div class="order-sum-box h3">
+                <div class = 'order-sum-row'>
+                    <span style = 'color:#333333'>合计</span>
+                    <span class = 'right' style = 'color:#f96147'>100积分</span>
+                </div>
+                <div class = 'order-sum-row'>
+                    <span>账户余额</span>
+                    <span class = 'right'>1000积分</span>
+                </div>
+                <div class = 'order-sum-row'>
+                    <span>下单时间</span>
+                    <span class = 'right'><%=moment(timestamp).format('YYYY-MM-DD HH:mm')%></span>
+                </div>
+            </div>
+       </div></script><div class=header><i class="icon-arrow-left-2 go-back"></i><h1>订单详情</h1></div><div class=container></div></div>

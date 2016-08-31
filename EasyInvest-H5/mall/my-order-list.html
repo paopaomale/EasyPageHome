@@ -1,0 +1,23 @@
+<div id=my-order data-view=mall/my-order-list><style type=text/css>#my-order .scroller li{height:2.45rem;background-color:#fff;border:none;margin-bottom:.1rem}#my-order #order-list{background-color:#f4f4f4}#my-order .goods-info-name{color:#333}#my-order .goods-info-price{color:#ff4c45}#my-order .goods-info-num{color:#333}#my-order .order-list-item{position:relative;padding:0 .1rem;margin-bottom:.1rem}#my-order .order-create-time{height:.35rem;line-height:.35rem;color:#2f2f2f}#my-order .order-goods-info{height:1rem;padding:.1rem .1rem .2rem 1rem;position:relative}#my-order .order-goods-row{height:.45rem}#my-order .order-goods-number{height:.6rem}#my-order .goods-info-img{position:absolute;left:0;top:0;width:1rem;height:100%;padding:.1rem .2rem .1rem .1rem}#my-order .goods-info-img img{height:100%;width:100%}#my-order .order-right{float:right}#my-order .order-goods-row>div{display:inline-block;line-height:.45rem}#my-order .order-goods-number>div{display:inline-block;line-height:.6rem}#my-order .order-left{color:#9a9a9a}#my-order .order-number{color:#9a9a9a}#my-order .price-sum-number{color:#f8604e}#my-order .bt-order-detail{padding:.08rem .15rem;color:#848484}</style><script id=order-list-template type=text/x-underscore-template><div class = 'order-list-item border-t'>
+             <div class = 'order-create-time border-b'>
+             <%=createTime%>
+            </div>
+            <div class = 'order-goods-info h2'>
+                <div class = 'goods-info-name'><%=name%></div>
+                <div class = 'goods-info-price'><%=payment%></div>
+                <div class = 'goods-info-num'>x 1</div>
+                <div class = 'goods-info-img'>
+                    <img src="<%=window._serverBasePath+img%>">
+                </div>
+            </div>
+            <div class = 'order-goods-row border-b'>
+                <div class = 'order-left h3 over-money'>余额：1222</div>
+                <div class = 'order-right h2 price-sum'>合计：<span class = 'price-sum-number'>800<span>积分</div>
+            </div>
+            <div class = 'order-goods-number'>
+                <div class = 'order-left h3 order-number'>订单号：9999999</div>
+                <div class = 'order-right h2 go-order-detail'>
+                     <span class = 'bt-order-detail border-radius' order-id = '<%=id%>'>查看详情</span>
+                </div>
+            </div>
+         </div></script><div class=header><i class="icon-arrow-left-2 go-back"></i><h1>我的订单</h1></div><div class=container><div id=order-list class=listview><div class=scroller style=padding-bottom:50px><div class=pulldown><span class=icon></span><span class=label></span></div><ul class=order-list-content></ul><button class=loadmore><div class=label>点击加载更多</div><span class=icon></span></button><div class=message><div class=empty>没有数据</div><div class=error>数据加载失败</div></div></div></div></div></div>
